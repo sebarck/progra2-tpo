@@ -3,108 +3,43 @@
  */
 package ar.edu.uade.progra2.tpo.misAplicaciones;
 
-import ar.edu.uade.progra2.tpo.miApi.ConjuntoTDA;
-import ar.edu.uade.progra2.tpo.misImplementaciones.DiccionarioMultiple;
-import ar.edu.uade.progra2.tpo.miApi.DiccionarioMultipleTDA;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import static java.lang.String.valueOf;
-import static java.util.regex.Pattern.compile;
+import ar.edu.uade.progra2.tpo.miApi.ConjuntoTDA;
+import ar.edu.uade.progra2.tpo.miApi.DiccionarioMultipleTDA;
+import ar.edu.uade.progra2.tpo.misImplementaciones.DiccionarioMultiple;
+import ar.edu.uade.progra2.tpo.misMetodos.Metodos;
 
 public class App {
 
     private static String file = "src/main/resources/Materias.csv";
     private static DiccionarioMultipleTDA diccionario;
+    private static Metodos metodos = new Metodos();
 
     public static void main(String[] args) throws IOException {
         inicializarDiccionario();
         cargarDiccionario();
-        porcentajeMateriasInformaticaPorCarrera();
-        porcentajeMateriasCienciasBasicasPorCarrera();
-        porcentajeMateriasCienciasSocialesPorCarrera();
+        imprimirCantidadMaterias();
+        
+        metodos.porcentajeMateriasInformaticaPorCarrera(diccionario);
+        metodos.porcentajeMateriasCienciasBasicasPorCarrera(diccionario);
+        metodos.porcentajeMateriasCienciasSocialesPorCarrera(diccionario);
     }
 
-    private static void porcentajeMateriasInformaticaPorCarrera() {
-        ConjuntoTDA carreras = diccionario.claves();
-        while (!carreras.conjuntoVacio()) {
-            int contadorMateriasInformatica = 0;
-            int contadorMaterias = 0;
-            int nroCarrera = carreras.elegir();
-            carreras.sacar(nroCarrera);
-            ConjuntoTDA materias = diccionario.recuperar(nroCarrera);
-            while (!materias.conjuntoVacio()) {
-                int codigoMateria = materias.elegir();
-                materias.sacar(codigoMateria);
-                Matcher esMateriaDeInformatica = compile("^(34)([0-9]+)").matcher(valueOf(codigoMateria));
-                if (esMateriaDeInformatica.matches()) {
-                    contadorMateriasInformatica++;
-                }
-                contadorMaterias++;
-            }
-            Double porcentaje = Double.valueOf(contadorMateriasInformatica) / Double.valueOf(contadorMaterias);
-            System.out.printf("Carrera %d | Porcenaje materias informatica %.2f\n", nroCarrera, porcentaje);
+ 
+    private static void imprimirCantidadMaterias() {
+    	ConjuntoTDA conjunto = diccionario.claves();
+        while(!conjunto.conjuntoVacio()) {
+        	int carrera = conjunto.elegir();
+        	System.out.println("La cantidad de materias para la carrera " + carrera + " es "  + metodos.cantidadMateriasPorCarrera(diccionario, carrera));
+        	conjunto.sacar(carrera);
         }
-    }
-    
-    private static void porcentajeMateriasCienciasBasicasPorCarrera() {
-        ConjuntoTDA carreras = diccionario.claves();
-        while (!carreras.conjuntoVacio()) {
-            int contadorMateriasCienciasBasicas = 0;
-            int contadorMaterias = 0;
-            int nroCarrera = carreras.elegir();
-            carreras.sacar(nroCarrera);
-            ConjuntoTDA materias = diccionario.recuperar(nroCarrera);
-            while (!materias.conjuntoVacio()) {
-                int codigoMateria = materias.elegir();
-                materias.sacar(codigoMateria);
-                Matcher esMateriaDeCienciasBasicas = compile("^(31)([0-9]+)").matcher(valueOf(codigoMateria));
-                if (esMateriaDeCienciasBasicas.matches()) {
-                    contadorMateriasCienciasBasicas++;
-                }
-                contadorMaterias++;
-            }
-            Double porcentaje = Double.valueOf(contadorMateriasCienciasBasicas) / Double.valueOf(contadorMaterias);
-            System.out.printf("Carrera %d | Porcenaje materias de ciencias básicas %.2f\n", nroCarrera, porcentaje);
-        }
-    }
-    
-    private static void porcentajeMateriasCienciasSocialesPorCarrera() {
-        ConjuntoTDA carreras = diccionario.claves();
-        while (!carreras.conjuntoVacio()) {
-            int contadorMateriasCienciasSociales = 0;
-            int contadorMaterias = 0;
-            int nroCarrera = carreras.elegir();
-            carreras.sacar(nroCarrera);
-            ConjuntoTDA materias = diccionario.recuperar(nroCarrera);
-            while (!materias.conjuntoVacio()) {
-                int codigoMateria = materias.elegir();
-                materias.sacar(codigoMateria);
-                Matcher esMateriaDeCienciasSociales = compile("^(2)([0-9]+)").matcher(valueOf(codigoMateria));
-                if (esMateriaDeCienciasSociales.matches()) {
-                    contadorMateriasCienciasSociales++;
-                }else{
-                    esMateriaDeCienciasSociales= compile("^(33)([0-9]+)").matcher(valueOf(codigoMateria));
-                    if (esMateriaDeCienciasSociales.matches()) {
-                        contadorMateriasCienciasSociales++;
-                    }
-                }
-                contadorMaterias++;
-            }
-            Double porcentaje = Double.valueOf(contadorMateriasCienciasSociales) / Double.valueOf(contadorMaterias);
-            System.out.printf("Carrera %d | Porcenaje materias de ciencias sociales %.2f\n", nroCarrera, porcentaje);
-        }
-    }
+	}
 
-    private static void cargarDiccionario() throws IOException {
+
+	private static void cargarDiccionario() throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(file));
         String line;
         reader.readLine();
