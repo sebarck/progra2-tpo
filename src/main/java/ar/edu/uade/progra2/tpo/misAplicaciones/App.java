@@ -3,12 +3,22 @@
  */
 package ar.edu.uade.progra2.tpo.misAplicaciones;
 
+import ar.edu.uade.progra2.tpo.miApi.ConjuntoTDA;
 import ar.edu.uade.progra2.tpo.misImplementaciones.DiccionarioMultiple;
 import ar.edu.uade.progra2.tpo.miApi.DiccionarioMultipleTDA;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static java.lang.String.valueOf;
+import static java.util.regex.Pattern.compile;
 
 public class App {
 
@@ -18,6 +28,29 @@ public class App {
     public static void main(String[] args) throws IOException {
         inicializarDiccionario();
         cargarDiccionario();
+        porcentajeMateriasInformaticaPorCarrera();
+    }
+
+    private static void porcentajeMateriasInformaticaPorCarrera() {
+        ConjuntoTDA carreras = diccionario.claves();
+        while (!carreras.conjuntoVacio()) {
+            int contadorMateriasInformatica = 0;
+            int contadorMaterias = 0;
+            int nroCarrera = carreras.elegir();
+            carreras.sacar(nroCarrera);
+            ConjuntoTDA materias = diccionario.recuperar(nroCarrera);
+            while (!materias.conjuntoVacio()) {
+                int codigoMateria = materias.elegir();
+                materias.sacar(codigoMateria);
+                Matcher esMateriaDeInformatica = compile("^(34)([0-9]+)").matcher(valueOf(codigoMateria));
+                if (esMateriaDeInformatica.matches()) {
+                    contadorMateriasInformatica++;
+                }
+                contadorMaterias++;
+            }
+            Double porcentaje = Double.valueOf(contadorMateriasInformatica) / Double.valueOf(contadorMaterias);
+            System.out.printf("Carrera %d | Porcenaje materias informatica %.2f\n", nroCarrera, porcentaje);
+        }
     }
 
     private static void cargarDiccionario() throws IOException {
