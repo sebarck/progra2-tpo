@@ -1,4 +1,6 @@
-package ar.edu.uade.progra2.tpo.tdas;
+package ar.edu.uade.progra2.tpo.misImplementaciones;
+
+import ar.edu.uade.progra2.tpo.miApi.ConjuntoTDA;
 
 public class Conjunto implements ConjuntoTDA {
 

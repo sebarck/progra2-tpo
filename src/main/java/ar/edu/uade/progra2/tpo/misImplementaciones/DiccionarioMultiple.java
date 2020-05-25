@@ -1,4 +1,7 @@
-package ar.edu.uade.progra2.tpo.tdas;
+package ar.edu.uade.progra2.tpo.misImplementaciones;
+
+import ar.edu.uade.progra2.tpo.miApi.ConjuntoTDA;
+import ar.edu.uade.progra2.tpo.miApi.DiccionarioMultipleTDA;
 
 public class DiccionarioMultiple implements DiccionarioMultipleTDA {
 

@@ -1,4 +1,4 @@
-package ar.edu.uade.progra2.tpo.tdas;
+package ar.edu.uade.progra2.tpo.miApi;
 
 public interface DiccionarioMultipleTDA {
 
