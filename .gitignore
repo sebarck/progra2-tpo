@@ -3,7 +3,7 @@
 .eclipse
 .workspace
 .vscode
- .metadata/**
+.metadata/**
 
 # Ignore Gradle project-specific cache directory
 .gradle
