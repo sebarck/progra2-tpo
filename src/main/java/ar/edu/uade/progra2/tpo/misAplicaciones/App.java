@@ -13,18 +13,14 @@ import java.io.IOException;
 public class App {
 
     private static String file = "src/main/resources/Materias.csv";
+    private static DiccionarioMultipleTDA diccionario;
 
-    public static void main(String[] args) {
-        DiccionarioMultipleTDA diccionario = inicializarDiccionario();
-        try {
-            cargarDiccionario(diccionario);
-        } catch (Exception e) {
-            System.err.format("No se pudo leer el archivo '%s'.", file);
-            e.printStackTrace();
-        }
+    public static void main(String[] args) throws IOException {
+        inicializarDiccionario();
+        cargarDiccionario();
     }
 
-    private static void cargarDiccionario(DiccionarioMultipleTDA diccionario) throws IOException {
+    private static void cargarDiccionario() throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(file));
         String line;
         reader.readLine();
@@ -38,9 +34,8 @@ public class App {
         reader.close();
     }
 
-    private static DiccionarioMultipleTDA inicializarDiccionario() {
-        DiccionarioMultipleTDA diccionario = new DiccionarioMultiple();
+    private static void inicializarDiccionario() {
+        diccionario = new DiccionarioMultiple();
         diccionario.inicializarDiccionarioMultiple();
-        return diccionario;
     }
 }

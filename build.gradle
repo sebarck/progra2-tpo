@@ -12,5 +12,5 @@ dependencies {
 }
 
 application {
-    mainClassName = 'ar.edu.uade.progra2.tpo.App'
+    mainClassName = 'ar.edu.uade.progra2.tpo.misAplicaciones.App'
 }
