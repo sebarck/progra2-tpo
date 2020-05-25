@@ -29,8 +29,8 @@ public class App {
         inicializarDiccionario();
         cargarDiccionario();
         porcentajeMateriasInformaticaPorCarrera();
-        porcentajeMateriasCienciasBasicas();
-        porcentajeMateriasCienciasSociales();
+        porcentajeMateriasCienciasBasicasPorCarrera();
+        porcentajeMateriasCienciasSocialesPorCarrera();
     }
 
     private static void porcentajeMateriasInformaticaPorCarrera() {
@@ -67,12 +67,12 @@ public class App {
                 int codigoMateria = materias.elegir();
                 materias.sacar(codigoMateria);
                 Matcher esMateriaDeCienciasBasicas = compile("^(31)([0-9]+)").matcher(valueOf(codigoMateria));
-                if (esMateriaDeInformatica.matches()) {
-                    contadorMateriasInformatica++;
+                if (esMateriaDeCienciasBasicas.matches()) {
+                    contadorMateriasCienciasBasicas++;
                 }
                 contadorMaterias++;
             }
-            Double porcentaje = Double.valueOf(contadorMateriasInformatica) / Double.valueOf(contadorMaterias);
+            Double porcentaje = Double.valueOf(contadorMateriasCienciasBasicas) / Double.valueOf(contadorMaterias);
             System.out.printf("Carrera %d | Porcenaje materias de ciencias básicas %.2f\n", nroCarrera, porcentaje);
         }
     }
@@ -80,7 +80,7 @@ public class App {
     private static void porcentajeMateriasCienciasSocialesPorCarrera() {
         ConjuntoTDA carreras = diccionario.claves();
         while (!carreras.conjuntoVacio()) {
-            int contadorMateriasInformatica = 0;
+            int contadorMateriasCienciasSociales = 0;
             int contadorMaterias = 0;
             int nroCarrera = carreras.elegir();
             carreras.sacar(nroCarrera);
@@ -89,17 +89,17 @@ public class App {
                 int codigoMateria = materias.elegir();
                 materias.sacar(codigoMateria);
                 Matcher esMateriaDeCienciasSociales = compile("^(2)([0-9]+)").matcher(valueOf(codigoMateria));
-                if (esMateriaDeInformatica.matches()) {
-                    contadorMateriasInformatica++;
+                if (esMateriaDeCienciasSociales.matches()) {
+                    contadorMateriasCienciasSociales++;
                 }else{
-                    Matcher esMateriaDeCienciasSociales= compile("^(33)([0-9]+)").matcher(valueOf(codigoMateria));
-                    if (esMateriaDeInformatica.matches()) {
-                        contadorMateriasInformatica++;
+                    esMateriaDeCienciasSociales= compile("^(33)([0-9]+)").matcher(valueOf(codigoMateria));
+                    if (esMateriaDeCienciasSociales.matches()) {
+                        contadorMateriasCienciasSociales++;
                     }
                 }
                 contadorMaterias++;
             }
-            Double porcentaje = Double.valueOf(contadorMateriasInformatica) / Double.valueOf(contadorMaterias);
+            Double porcentaje = Double.valueOf(contadorMateriasCienciasSociales) / Double.valueOf(contadorMaterias);
             System.out.printf("Carrera %d | Porcenaje materias de ciencias sociales %.2f\n", nroCarrera, porcentaje);
         }
     }
