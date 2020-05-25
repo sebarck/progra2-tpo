@@ -29,6 +29,8 @@ public class App {
         inicializarDiccionario();
         cargarDiccionario();
         porcentajeMateriasInformaticaPorCarrera();
+        porcentajeMateriasCienciasBasicas();
+        porcentajeMateriasCienciasSociales();
     }
 
     private static void porcentajeMateriasInformaticaPorCarrera() {
@@ -50,6 +52,55 @@ public class App {
             }
             Double porcentaje = Double.valueOf(contadorMateriasInformatica) / Double.valueOf(contadorMaterias);
             System.out.printf("Carrera %d | Porcenaje materias informatica %.2f\n", nroCarrera, porcentaje);
+        }
+    }
+    
+    private static void porcentajeMateriasCienciasBasicasPorCarrera() {
+        ConjuntoTDA carreras = diccionario.claves();
+        while (!carreras.conjuntoVacio()) {
+            int contadorMateriasCienciasBasicas = 0;
+            int contadorMaterias = 0;
+            int nroCarrera = carreras.elegir();
+            carreras.sacar(nroCarrera);
+            ConjuntoTDA materias = diccionario.recuperar(nroCarrera);
+            while (!materias.conjuntoVacio()) {
+                int codigoMateria = materias.elegir();
+                materias.sacar(codigoMateria);
+                Matcher esMateriaDeCienciasBasicas = compile("^(31)([0-9]+)").matcher(valueOf(codigoMateria));
+                if (esMateriaDeInformatica.matches()) {
+                    contadorMateriasInformatica++;
+                }
+                contadorMaterias++;
+            }
+            Double porcentaje = Double.valueOf(contadorMateriasInformatica) / Double.valueOf(contadorMaterias);
+            System.out.printf("Carrera %d | Porcenaje materias de ciencias básicas %.2f\n", nroCarrera, porcentaje);
+        }
+    }
+    
+    private static void porcentajeMateriasCienciasSocialesPorCarrera() {
+        ConjuntoTDA carreras = diccionario.claves();
+        while (!carreras.conjuntoVacio()) {
+            int contadorMateriasInformatica = 0;
+            int contadorMaterias = 0;
+            int nroCarrera = carreras.elegir();
+            carreras.sacar(nroCarrera);
+            ConjuntoTDA materias = diccionario.recuperar(nroCarrera);
+            while (!materias.conjuntoVacio()) {
+                int codigoMateria = materias.elegir();
+                materias.sacar(codigoMateria);
+                Matcher esMateriaDeCienciasSociales = compile("^(2)([0-9]+)").matcher(valueOf(codigoMateria));
+                if (esMateriaDeInformatica.matches()) {
+                    contadorMateriasInformatica++;
+                }else{
+                    Matcher esMateriaDeCienciasSociales= compile("^(33)([0-9]+)").matcher(valueOf(codigoMateria));
+                    if (esMateriaDeInformatica.matches()) {
+                        contadorMateriasInformatica++;
+                    }
+                }
+                contadorMaterias++;
+            }
+            Double porcentaje = Double.valueOf(contadorMateriasInformatica) / Double.valueOf(contadorMaterias);
+            System.out.printf("Carrera %d | Porcenaje materias de ciencias sociales %.2f\n", nroCarrera, porcentaje);
         }
     }
 
