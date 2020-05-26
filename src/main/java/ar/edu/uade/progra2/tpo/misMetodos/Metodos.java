@@ -11,10 +11,10 @@ import ar.edu.uade.progra2.tpo.miApi.DiccionarioMultipleTDA;
 public class Metodos {
 
 	/**
-	 * @param diccionario
-	 * @return
+	 * @return int Cantidad de materias por carrera
 	 * @Tarea Cantidad de materias de cada una de las carreras
-	 * @Parametros Diccionario, Numero de carrera
+	 * @Parametros  Diccionario que se desea analizar
+	 *              nroCarrera Numero de carrera de la cual se desea saber cantidad de materias
 	 * @Devuelve cantidad de materias
 	 * @Precondicion La carrera debe existir
 	 * @Postcondicion
@@ -23,33 +23,33 @@ public class Metodos {
 
 
 	/**
-	 * @Tarea Porcentaje de materias de ciencias b�sicas en cada una de las carreras
-	 *        (materias que comienzan con c�digo 31xxx)
-	 * @Par�metros
+	 * @Tarea Porcentaje de materias de ciencias basicas en cada una de las carreras
+	 *        (materias que comienzan con codigo 31xxx)
+	 * @Parametros
 	 * @Devuelve
-	 * @Precondici�n
-	 * @Postcondici�n
+	 * @Precondicion
+	 * @Postcondicion
 	 * @Costo
 	 **/
 
 
 	/**
 	 * @Tarea Porcentaje de materias de ciencias sociales en cada una de las
-	 *        carreras (materias comienzan con c�digos 2xxxx y 33xxx)
-	 * @Par�metros
+	 *        carreras (materias comienzan con codigos 2xxxx y 33xxx)
+	 * @Parametros
 	 * @Devuelve
-	 * @Precondici�n
-	 * @Postcondici�n
+	 * @Precondicion
+	 * @Postcondicion
 	 * @Costo
 	 **/
 
 
 	/**
 	 * @Tarea Cantidad de materias optativas de cada una de las carreras
-	 * @Par�metros
+	 * @Parametros
 	 * @Devuelve
-	 * @Precondici�n
-	 * @Postcondici�n
+	 * @Precondicion
+	 * @Postcondicion
 	 * @Costo
 	 **/
 	public void cantidadOptativasPorCarrera(DiccionarioMultipleTDA diccionario, int nroCarrera) {
@@ -57,24 +57,24 @@ public class Metodos {
 	}
 
 	/**
-	 * @Tarea Materias comunes a todas las carreras indicadas, ordenadas por c�digo
+	 * @Tarea Materias comunes a todas las carreras indicadas, ordenadas por codigo
 	 *        de materia (no incluir materias optativas)
-	 * @Par�metros
+	 * @Parametros
 	 * @Devuelve
-	 * @Precondici�n
-	 * @Postcondici�n
+	 * @Precondicion
+	 * @Postcondicion
 	 * @Costo
 	 **/
 
 	// METODO
 
 	/**
-	 * @Tarea Carrera/s que incluyan m�s del 80% de las materias de otra carrera,
+	 * @Tarea Carrera/s que incluyan mas del 80% de las materias de otra carrera,
 	 *        indicando las carreras relacionadas.
-	 * @Par�metros
+	 * @Parametros
 	 * @Devuelve
-	 * @Precondici�n
-	 * @Postcondici�n
+	 * @Precondicion
+	 * @Postcondicion
 	 * @Costo
 	 **/
 
@@ -82,35 +82,35 @@ public class Metodos {
 
 	/**
 	 * @Tarea Materias de cada carrera que no comparten con ninguna otra carrera,
-	 *        ordenadas por // c�digo de materia, indicando la carrera a la que
+	 *        ordenadas por codigo de materia, indicando la carrera a la que
 	 *        pertenecen.
-	 * @Par�metros
+	 * @Parametros
 	 * @Devuelve
-	 * @Precondici�n
-	 * @Postcondici�n
+	 * @Precondicion
+	 * @Postcondicion
 	 * @Costo
 	 **/
 
 	// METODO
 
 	/**
-	 * @Tarea Carrera/s que s�lo tengan el 20% de las materias de otra carrera,
-	 *        indicando las // carreras relacionadas.
-	 * @Par�metros
+	 * @Tarea Carrera/s que solo tengan el 20% de las materias de otra carrera,
+	 *        indicando las carreras relacionadas.
+	 * @Parametros
 	 * @Devuelve
-	 * @Precondici�n
-	 * @Postcondici�n
+	 * @Precondicion
+	 * @Postcondicion
 	 * @Costo
 	 **/
 
 	// METODO
 
 	/**
-	 * @Tarea Para cada combinaci�n de dos carreras, indicar materias no comunes.
-	 * @Par�metros
+	 * @Tarea Para cada combinacion de dos carreras, indicar materias no comunes.
+	 * @Parametros
 	 * @Devuelve
-	 * @Precondici�n
-	 * @Postcondici�n
+	 * @Precondicion
+	 * @Postcondicion
 	 * @Costo
 	 **/
 
