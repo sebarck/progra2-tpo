@@ -23,6 +23,7 @@ public class App {
     private static PuntoC puntoC = new PuntoC();
     private static PuntoD puntoD = new PuntoD();
     private static PuntoE puntoE = new PuntoE();
+    private static PuntoF puntoF = new PuntoF();
     private static PuntoH puntoH = new PuntoH();
     
 
@@ -36,6 +37,7 @@ public class App {
         puntoD.porcentajeMateriasCienciasSocialesPorCarrera(diccionario);
         puntoE.calcularCantidadOptativasPorCarrera(diccionario);
         imprimirMateriasUnicas();
+        puntoF.materiasComunes(diccionario);
     }
 
  
