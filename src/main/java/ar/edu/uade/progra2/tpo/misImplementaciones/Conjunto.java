@@ -24,14 +24,13 @@ public class Conjunto implements ConjuntoTDA {
 
     @Override
 	public void sacar(int elemento) {
-		if (pertenece(elemento)) {
-			int i = 0;
-			while (i < cantidad && elementos[i] != elemento) {
-				i += 1;
-			}
-			elementos[i] = elementos[cantidad - 1];
-			cantidad -= 1;
-		}
+        int posicion = 0;
+        while (posicion < cantidad && elementos[posicion] != elemento) {
+            posicion++;
+        }
+        if (posicion < cantidad) {
+            elementos[posicion] = elementos[--cantidad];
+        }
 	}
     @Override
     public int elegir() {
