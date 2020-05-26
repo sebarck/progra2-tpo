@@ -20,14 +20,9 @@ public class PuntoD {
             while (!materias.conjuntoVacio()) {
                 int codigoMateria = materias.elegir();
                 materias.sacar(codigoMateria);
-                Matcher esMateriaDeCienciasSociales = compile("^(2)([0-9]+)").matcher(valueOf(codigoMateria));
+                Matcher esMateriaDeCienciasSociales = compile("^(2|33)([0-9]+)").matcher(valueOf(codigoMateria));
                 if (esMateriaDeCienciasSociales.matches()) {
                     contadorMateriasCienciasSociales++;
-                } else {
-                    esMateriaDeCienciasSociales = compile("^(33)([0-9]+)").matcher(valueOf(codigoMateria));
-                    if (esMateriaDeCienciasSociales.matches()) {
-                        contadorMateriasCienciasSociales++;
-                    }
                 }
                 contadorMaterias++;
             }
