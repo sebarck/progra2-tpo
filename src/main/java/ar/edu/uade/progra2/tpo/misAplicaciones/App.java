@@ -7,8 +7,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import ar.edu.uade.progra2.tpo.miApi.ColaPrioridadTDA;
 import ar.edu.uade.progra2.tpo.miApi.ConjuntoTDA;
 import ar.edu.uade.progra2.tpo.miApi.DiccionarioMultipleTDA;
+import ar.edu.uade.progra2.tpo.misImplementaciones.ColaPrioridad;
 import ar.edu.uade.progra2.tpo.misImplementaciones.DiccionarioMultiple;
 import ar.edu.uade.progra2.tpo.misMetodos.*;
 
@@ -21,6 +23,8 @@ public class App {
     private static PuntoC puntoC = new PuntoC();
     private static PuntoD puntoD = new PuntoD();
     private static PuntoE puntoE = new PuntoE();
+    private static PuntoH puntoH = new PuntoH();
+    
 
     public static void main(String[] args) throws IOException {
         inicializarDiccionario();
@@ -31,16 +35,29 @@ public class App {
         puntoC.porcentajeMateriasCienciasBasicasPorCarrera(diccionario);
         puntoD.porcentajeMateriasCienciasSocialesPorCarrera(diccionario);
         puntoE.calcularCantidadOptativasPorCarrera(diccionario);
+        imprimirMateriasUnicas();
     }
 
  
     private static void imprimirCantidadMaterias() {
+    	System.out.println("\nCantidad de materias por carrera:");
     	ConjuntoTDA conjunto = diccionario.claves();
         while(!conjunto.conjuntoVacio()) {
         	int carrera = conjunto.elegir();
-        	System.out.println("La cantidad de materias para la carrera " + carrera + " es "  + puntoA.cantidadMateriasPorCarrera(diccionario, carrera));
+        	System.out.println("La carrera " + carrera + " tiene "  + puntoA.cantidadMateriasPorCarrera(diccionario, carrera) + " materias.");
         	conjunto.sacar(carrera);
         }
+	}
+    
+    private static void imprimirMateriasUnicas() {
+    	System.out.println("\nMaterias de cada carrera que no comparten con ninguna otra carrera:");
+    	ColaPrioridadTDA cola = new ColaPrioridad();
+    	cola.inicializarCola();
+    	cola = puntoH.materiasUnicasPorCarrera(diccionario);
+    	while(!cola.colaVacia()) {
+			System.out.println("Codigo materia: " + cola.prioridad() + " - Carrera: " + cola.primero());
+			cola.desacolar();
+		}
 	}
 
 

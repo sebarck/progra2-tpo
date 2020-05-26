@@ -27,7 +27,7 @@ public class PuntoC {
                 contadorMaterias++;
             }
             Double porcentaje = Double.valueOf(contadorMateriasCienciasBasicas) / Double.valueOf(contadorMaterias);
-            System.out.printf("Carrera %d | Porcenaje materias de ciencias b�sicas %.2f\n", nroCarrera, porcentaje);
+            System.out.printf("Carrera %d | Porcenaje materias de ciencias basicas %.2f\n", nroCarrera, porcentaje);
         }
     }
 }
