@@ -10,10 +10,7 @@ import java.io.IOException;
 import ar.edu.uade.progra2.tpo.miApi.ConjuntoTDA;
 import ar.edu.uade.progra2.tpo.miApi.DiccionarioMultipleTDA;
 import ar.edu.uade.progra2.tpo.misImplementaciones.DiccionarioMultiple;
-import ar.edu.uade.progra2.tpo.misMetodos.PuntoA;
-import ar.edu.uade.progra2.tpo.misMetodos.PuntoB;
-import ar.edu.uade.progra2.tpo.misMetodos.PuntoC;
-import ar.edu.uade.progra2.tpo.misMetodos.PuntoD;
+import ar.edu.uade.progra2.tpo.misMetodos.*;
 
 public class App {
 
@@ -23,6 +20,7 @@ public class App {
     private static PuntoB puntoB = new PuntoB();
     private static PuntoC puntoC = new PuntoC();
     private static PuntoD puntoD = new PuntoD();
+    private static PuntoE puntoE = new PuntoE();
 
     public static void main(String[] args) throws IOException {
         inicializarDiccionario();
@@ -32,6 +30,7 @@ public class App {
         puntoB.porcentajeMateriasInformaticaPorCarrera(diccionario);
         puntoC.porcentajeMateriasCienciasBasicasPorCarrera(diccionario);
         puntoD.porcentajeMateriasCienciasSocialesPorCarrera(diccionario);
+        puntoE.calcularCantidadOptativasPorCarrera(diccionario);
     }
 
  
