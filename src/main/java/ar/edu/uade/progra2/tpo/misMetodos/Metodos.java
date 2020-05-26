@@ -14,127 +14,42 @@ public class Metodos {
 	 * @param diccionario
 	 * @return
 	 * @Tarea Cantidad de materias de cada una de las carreras
-	 * @Parámetros Diccionario, Numero de carrera
+	 * @Parametros Diccionario, Numero de carrera
 	 * @Devuelve cantidad de materias
-	 * @Precondición La carrera debe existir
-	 * @Postcondición
+	 * @Precondicion La carrera debe existir
+	 * @Postcondicion
 	 * @Costo
 	 **/
-	public int cantidadMateriasPorCarrera(DiccionarioMultipleTDA diccionario, int nroCarrera) {
-		ConjuntoTDA materias = diccionario.recuperar(nroCarrera);
-		int contadorMaterias = 0;
-		while (!materias.conjuntoVacio()) {
-			int codigoMateria = materias.elegir();
-			materias.sacar(codigoMateria);
-			contadorMaterias++;
-		}
-		return contadorMaterias;
-	}
+
 
 	/**
-	 * @Tarea Porcentaje de materias de informática en cada una de las carreras
-	 *        (materias que comienzan con código 34xxx)
-	 * @Parámetros
+	 * @Tarea Porcentaje de materias de ciencias bï¿½sicas en cada una de las carreras
+	 *        (materias que comienzan con cï¿½digo 31xxx)
+	 * @Parï¿½metros
 	 * @Devuelve
-	 * @Precondición
-	 * @Postcondición
+	 * @Precondiciï¿½n
+	 * @Postcondiciï¿½n
 	 * @Costo
 	 **/
-	public void porcentajeMateriasInformaticaPorCarrera(DiccionarioMultipleTDA diccionario) {
-		ConjuntoTDA carreras = diccionario.claves();
-		while (!carreras.conjuntoVacio()) {
-			int contadorMateriasInformatica = 0;
-			int contadorMaterias = 0;
-			int nroCarrera = carreras.elegir();
-			carreras.sacar(nroCarrera);
-			ConjuntoTDA materias = diccionario.recuperar(nroCarrera);
-			while (!materias.conjuntoVacio()) {
-				int codigoMateria = materias.elegir();
-				materias.sacar(codigoMateria);
-				Matcher esMateriaDeInformatica = compile("^(34)([0-9]+)").matcher(valueOf(codigoMateria));
-				if (esMateriaDeInformatica.matches()) {
-					contadorMateriasInformatica++;
-				}
-				contadorMaterias++;
-			}
-			Double porcentaje = Double.valueOf(contadorMateriasInformatica) / Double.valueOf(contadorMaterias);
-			System.out.printf("Carrera %d | Porcenaje materias informatica %.2f\n", nroCarrera, porcentaje);
-		}
-	}
 
-	/**
-	 * @Tarea Porcentaje de materias de ciencias básicas en cada una de las carreras
-	 *        (materias que comienzan con código 31xxx)
-	 * @Parámetros
-	 * @Devuelve
-	 * @Precondición
-	 * @Postcondición
-	 * @Costo
-	 **/
-	public void porcentajeMateriasCienciasBasicasPorCarrera(DiccionarioMultipleTDA diccionario) {
-		ConjuntoTDA carreras = diccionario.claves();
-		while (!carreras.conjuntoVacio()) {
-			int contadorMateriasCienciasBasicas = 0;
-			int contadorMaterias = 0;
-			int nroCarrera = carreras.elegir();
-			carreras.sacar(nroCarrera);
-			ConjuntoTDA materias = diccionario.recuperar(nroCarrera);
-			while (!materias.conjuntoVacio()) {
-				int codigoMateria = materias.elegir();
-				materias.sacar(codigoMateria);
-				Matcher esMateriaDeCienciasBasicas = compile("^(31)([0-9]+)").matcher(valueOf(codigoMateria));
-				if (esMateriaDeCienciasBasicas.matches()) {
-					contadorMateriasCienciasBasicas++;
-				}
-				contadorMaterias++;
-			}
-			Double porcentaje = Double.valueOf(contadorMateriasCienciasBasicas) / Double.valueOf(contadorMaterias);
-			System.out.printf("Carrera %d | Porcenaje materias de ciencias básicas %.2f\n", nroCarrera, porcentaje);
-		}
-	}
 
 	/**
 	 * @Tarea Porcentaje de materias de ciencias sociales en cada una de las
-	 *        carreras (materias comienzan con códigos 2xxxx y 33xxx)
-	 * @Parámetros
+	 *        carreras (materias comienzan con cï¿½digos 2xxxx y 33xxx)
+	 * @Parï¿½metros
 	 * @Devuelve
-	 * @Precondición
-	 * @Postcondición
+	 * @Precondiciï¿½n
+	 * @Postcondiciï¿½n
 	 * @Costo
 	 **/
-	public void porcentajeMateriasCienciasSocialesPorCarrera(DiccionarioMultipleTDA diccionario) {
-		ConjuntoTDA carreras = diccionario.claves();
-		while (!carreras.conjuntoVacio()) {
-			int contadorMateriasCienciasSociales = 0;
-			int contadorMaterias = 0;
-			int nroCarrera = carreras.elegir();
-			carreras.sacar(nroCarrera);
-			ConjuntoTDA materias = diccionario.recuperar(nroCarrera);
-			while (!materias.conjuntoVacio()) {
-				int codigoMateria = materias.elegir();
-				materias.sacar(codigoMateria);
-				Matcher esMateriaDeCienciasSociales = compile("^(2)([0-9]+)").matcher(valueOf(codigoMateria));
-				if (esMateriaDeCienciasSociales.matches()) {
-					contadorMateriasCienciasSociales++;
-				} else {
-					esMateriaDeCienciasSociales = compile("^(33)([0-9]+)").matcher(valueOf(codigoMateria));
-					if (esMateriaDeCienciasSociales.matches()) {
-						contadorMateriasCienciasSociales++;
-					}
-				}
-				contadorMaterias++;
-			}
-			Double porcentaje = Double.valueOf(contadorMateriasCienciasSociales) / Double.valueOf(contadorMaterias);
-			System.out.printf("Carrera %d | Porcenaje materias de ciencias sociales %.2f\n", nroCarrera, porcentaje);
-		}
-	}
+
 
 	/**
 	 * @Tarea Cantidad de materias optativas de cada una de las carreras
-	 * @Parámetros
+	 * @Parï¿½metros
 	 * @Devuelve
-	 * @Precondición
-	 * @Postcondición
+	 * @Precondiciï¿½n
+	 * @Postcondiciï¿½n
 	 * @Costo
 	 **/
 	public void cantidadOptativasPorCarrera(DiccionarioMultipleTDA diccionario, int nroCarrera) {
@@ -142,24 +57,24 @@ public class Metodos {
 	}
 
 	/**
-	 * @Tarea Materias comunes a todas las carreras indicadas, ordenadas por código
+	 * @Tarea Materias comunes a todas las carreras indicadas, ordenadas por cï¿½digo
 	 *        de materia (no incluir materias optativas)
-	 * @Parámetros
+	 * @Parï¿½metros
 	 * @Devuelve
-	 * @Precondición
-	 * @Postcondición
+	 * @Precondiciï¿½n
+	 * @Postcondiciï¿½n
 	 * @Costo
 	 **/
 
 	// METODO
 
 	/**
-	 * @Tarea Carrera/s que incluyan más del 80% de las materias de otra carrera,
+	 * @Tarea Carrera/s que incluyan mï¿½s del 80% de las materias de otra carrera,
 	 *        indicando las carreras relacionadas.
-	 * @Parámetros
+	 * @Parï¿½metros
 	 * @Devuelve
-	 * @Precondición
-	 * @Postcondición
+	 * @Precondiciï¿½n
+	 * @Postcondiciï¿½n
 	 * @Costo
 	 **/
 
@@ -167,35 +82,35 @@ public class Metodos {
 
 	/**
 	 * @Tarea Materias de cada carrera que no comparten con ninguna otra carrera,
-	 *        ordenadas por // código de materia, indicando la carrera a la que
+	 *        ordenadas por // cï¿½digo de materia, indicando la carrera a la que
 	 *        pertenecen.
-	 * @Parámetros
+	 * @Parï¿½metros
 	 * @Devuelve
-	 * @Precondición
-	 * @Postcondición
+	 * @Precondiciï¿½n
+	 * @Postcondiciï¿½n
 	 * @Costo
 	 **/
 
 	// METODO
 
 	/**
-	 * @Tarea Carrera/s que sólo tengan el 20% de las materias de otra carrera,
+	 * @Tarea Carrera/s que sï¿½lo tengan el 20% de las materias de otra carrera,
 	 *        indicando las // carreras relacionadas.
-	 * @Parámetros
+	 * @Parï¿½metros
 	 * @Devuelve
-	 * @Precondición
-	 * @Postcondición
+	 * @Precondiciï¿½n
+	 * @Postcondiciï¿½n
 	 * @Costo
 	 **/
 
 	// METODO
 
 	/**
-	 * @Tarea Para cada combinación de dos carreras, indicar materias no comunes.
-	 * @Parámetros
+	 * @Tarea Para cada combinaciï¿½n de dos carreras, indicar materias no comunes.
+	 * @Parï¿½metros
 	 * @Devuelve
-	 * @Precondición
-	 * @Postcondición
+	 * @Precondiciï¿½n
+	 * @Postcondiciï¿½n
 	 * @Costo
 	 **/
 

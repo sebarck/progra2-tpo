@@ -10,22 +10,28 @@ import java.io.IOException;
 import ar.edu.uade.progra2.tpo.miApi.ConjuntoTDA;
 import ar.edu.uade.progra2.tpo.miApi.DiccionarioMultipleTDA;
 import ar.edu.uade.progra2.tpo.misImplementaciones.DiccionarioMultiple;
-import ar.edu.uade.progra2.tpo.misMetodos.Metodos;
+import ar.edu.uade.progra2.tpo.misMetodos.PuntoA;
+import ar.edu.uade.progra2.tpo.misMetodos.PuntoB;
+import ar.edu.uade.progra2.tpo.misMetodos.PuntoC;
+import ar.edu.uade.progra2.tpo.misMetodos.PuntoD;
 
 public class App {
 
     private static String file = "src/main/resources/Materias.csv";
     private static DiccionarioMultipleTDA diccionario;
-    private static Metodos metodos = new Metodos();
+    private static PuntoA puntoA = new PuntoA();
+    private static PuntoB puntoB = new PuntoB();
+    private static PuntoC puntoC = new PuntoC();
+    private static PuntoD puntoD = new PuntoD();
 
     public static void main(String[] args) throws IOException {
         inicializarDiccionario();
         cargarDiccionario();
         imprimirCantidadMaterias();
-        
-        metodos.porcentajeMateriasInformaticaPorCarrera(diccionario);
-        metodos.porcentajeMateriasCienciasBasicasPorCarrera(diccionario);
-        metodos.porcentajeMateriasCienciasSocialesPorCarrera(diccionario);
+
+        puntoB.porcentajeMateriasInformaticaPorCarrera(diccionario);
+        puntoC.porcentajeMateriasCienciasBasicasPorCarrera(diccionario);
+        puntoD.porcentajeMateriasCienciasSocialesPorCarrera(diccionario);
     }
 
  
@@ -33,7 +39,7 @@ public class App {
     	ConjuntoTDA conjunto = diccionario.claves();
         while(!conjunto.conjuntoVacio()) {
         	int carrera = conjunto.elegir();
-        	System.out.println("La cantidad de materias para la carrera " + carrera + " es "  + metodos.cantidadMateriasPorCarrera(diccionario, carrera));
+        	System.out.println("La cantidad de materias para la carrera " + carrera + " es "  + puntoA.cantidadMateriasPorCarrera(diccionario, carrera));
         	conjunto.sacar(carrera);
         }
 	}
