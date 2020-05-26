@@ -15,28 +15,33 @@ public class PuntoE {
         while (!carreras.conjuntoVacio()) {
             // Lo defino como byte, asumiendo que las optativas pueden
             // llegar a un valor de 127.
-            byte cantidadOptativas = 0;
+            int cantidadOptativas = 0;
             int nroCarrera = carreras.elegir();
             carreras.sacar(nroCarrera);
             ConjuntoTDA materias = diccionario.recuperar(nroCarrera);
+            String codigoCarrera = "El codigo de carrera " + nroCarrera;
 
-            while (!materias.conjuntoVacio()) {
+            while (!materias.conjuntoVacio() && cantidadOptativas == 0) {
                 int codigoMateria = materias.elegir();
                 materias.sacar(codigoMateria);
+                // Aca evaluo que haya UNA sola ocurrencia del 0 al 9 en la linea
+                // Asumimos que los codigos de materias cuando hay optativas van del 0 al 9
                 Matcher esOptativa = compile("[0-9]").matcher(valueOf(codigoMateria));
-                if (esOptativa.matches()) {
-                    cantidadOptativas++;
-                }
+                // Aca asumimos que la cantidad de optativas sale del codigo de materia
+                // dado que vimos que los valores coinciden
+                cantidadOptativas = (esOptativa.matches()) ? codigoMateria : cantidadOptativas;
             }
 
+
             if (cantidadOptativas > 0) {
-                final String materia = (cantidadOptativas == 1)
+                // Simplemente para que quede lindo en caso de que la cantidad sea 1
+                final String stringMateria = (cantidadOptativas == 1)
                         ? " materia optativa"
                         : " materias optativas";
 
-                System.out.println("El codigo de carrera " + nroCarrera + " posee " + cantidadOptativas + materia);
+                System.out.println(codigoCarrera + " posee " + cantidadOptativas + stringMateria);
             } else {
-                System.out.println("El codigo de carrera " + nroCarrera + " no posee materias optativas");
+                System.out.println(codigoCarrera + " no posee materias optativas");
             }
         }
     }
