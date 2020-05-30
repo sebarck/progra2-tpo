@@ -6,16 +6,15 @@ import ar.edu.uade.progra2.tpo.miApi.DiccionarioMultipleTDA;
 import ar.edu.uade.progra2.tpo.misImplementaciones.ColaPrioridad;
 import ar.edu.uade.progra2.tpo.misImplementaciones.Conjunto;
 
-public class PuntoH {
+public class PuntoHJ {
 
 	/**
-	 * @return 
 	 * @Tarea Materias de cada carrera que no comparten con ninguna otra carrera,
 	 *        ordenadas por código de materia, indicando la carrera a la que
 	 *        pertenecen.
-	 * @Parámetros
-	 * @Devuelve
-	 * @Precondición
+	 * @Parámetros DiccionarioMultipleTDA diccionario
+	 * @Devuelve ColaPrioridadTDA
+	 * @Precondición 
 	 * @Postcondición
 	 * @Costo 
 	 **/
@@ -49,6 +48,26 @@ public class PuntoH {
 		}
 		return materiasUnicas;
 	}
+	
+
+	/**
+	 * @Tarea Para cada combinacion de dos carreras, indicar materias no comunes.
+	 * @Parametros DiccionarioMultipleTDA diccionario, int nroCarrera, int nroCarrera2
+	 * @Devuelve ConjuntoTDA
+	 * @Precondicion Carreras existan
+	 * @Postcondicion
+	 * @Costo
+	 **/
+
+	// METODO
+
+	public ConjuntoTDA materiasNoComunesEntre2Carreras(DiccionarioMultipleTDA diccionario, int nroCarrera, int nroCarrera2) {
+		ConjuntoTDA materias = diccionario.recuperar(nroCarrera);
+		ConjuntoTDA materias2 = diccionario.recuperar(nroCarrera2);
+		ConjuntoTDA diferencia = diferenciaSimetrica(materias, materias2);
+		return diferencia;
+		
+	}
 
 	
 	private ConjuntoTDA diferencia(ConjuntoTDA c1, ConjuntoTDA c2) {
@@ -80,4 +99,53 @@ public class PuntoH {
 		}
 		return conjunto;
 	}
+	
+	private ConjuntoTDA diferenciaSimetrica(ConjuntoTDA c1, ConjuntoTDA c2) {
+		ConjuntoTDA conjunto = new Conjunto();
+		conjunto.inicializarConjunto();
+		ConjuntoTDA conjuntoAux = new Conjunto();
+		conjuntoAux.inicializarConjunto();
+		ConjuntoTDA conjuntoAux2 = new Conjunto();
+		conjuntoAux2.inicializarConjunto();
+
+		copiarConjuntoConjunto(c1, conjuntoAux);
+		copiarConjuntoConjunto(c2, conjuntoAux2);
+
+		conjunto = diferencia(conjuntoAux, conjuntoAux2);
+
+		ConjuntoTDA conjunto2 = new Conjunto();
+		conjunto2.inicializarConjunto();
+		conjunto2 = diferencia(c2, c1);
+
+		ConjuntoTDA conjuntoFinal = new Conjunto();
+		conjuntoFinal.inicializarConjunto();
+		conjuntoFinal = union(conjunto, conjunto2);
+		return conjuntoFinal;
+	}
+	
+	private void pasarConjuntoConjunto(ConjuntoTDA origen, ConjuntoTDA destino) {
+		int x;
+		while (!origen.conjuntoVacio()) {
+			x = origen.elegir();
+			destino.agregar(x);
+			origen.sacar(x);
+		}
+	}
+
+	public void copiarConjuntoConjunto(ConjuntoTDA origen, ConjuntoTDA destino) {
+		ConjuntoTDA aux;
+		aux = new Conjunto();
+		aux.inicializarConjunto();
+		int x;
+		pasarConjuntoConjunto(origen, aux);
+
+		while (!aux.conjuntoVacio()) {
+			x = aux.elegir();
+			origen.agregar(x);
+			destino.agregar(x);
+			aux.sacar(x);
+		}
+	}
+
+
 }

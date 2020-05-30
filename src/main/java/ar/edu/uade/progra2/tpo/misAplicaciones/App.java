@@ -11,6 +11,7 @@ import ar.edu.uade.progra2.tpo.miApi.ColaPrioridadTDA;
 import ar.edu.uade.progra2.tpo.miApi.ConjuntoTDA;
 import ar.edu.uade.progra2.tpo.miApi.DiccionarioMultipleTDA;
 import ar.edu.uade.progra2.tpo.misImplementaciones.ColaPrioridad;
+import ar.edu.uade.progra2.tpo.misImplementaciones.Conjunto;
 import ar.edu.uade.progra2.tpo.misImplementaciones.DiccionarioMultiple;
 import ar.edu.uade.progra2.tpo.misMetodos.*;
 
@@ -24,20 +25,20 @@ public class App {
     private static PuntoD puntoD = new PuntoD();
     private static PuntoE puntoE = new PuntoE();
     private static PuntoF puntoF = new PuntoF();
-    private static PuntoH puntoH = new PuntoH();
+    private static PuntoHJ puntoHJ = new PuntoHJ();
     
 
     public static void main(String[] args) throws IOException {
         inicializarDiccionario();
         cargarDiccionario();
         imprimirCantidadMaterias();
-
         puntoB.porcentajeMateriasInformaticaPorCarrera(diccionario);
         puntoC.porcentajeMateriasCienciasBasicasPorCarrera(diccionario);
         puntoD.porcentajeMateriasCienciasSocialesPorCarrera(diccionario);
         puntoE.calcularCantidadOptativasPorCarrera(diccionario);
         imprimirMateriasUnicas();
         puntoF.materiasComunes(diccionario);
+        imprimirMateriaNoComunes(diccionario);
     }
 
  
@@ -55,13 +56,36 @@ public class App {
     	System.out.println("\nMaterias de cada carrera que no comparten con ninguna otra carrera:");
     	ColaPrioridadTDA cola = new ColaPrioridad();
     	cola.inicializarCola();
-    	cola = puntoH.materiasUnicasPorCarrera(diccionario);
+    	cola = puntoHJ.materiasUnicasPorCarrera(diccionario);
     	while(!cola.colaVacia()) {
 			System.out.println("Codigo materia: " + cola.prioridad() + " - Carrera: " + cola.primero());
 			cola.desacolar();
 		}
 	}
+    
+	private static void imprimirMateriaNoComunes(DiccionarioMultipleTDA diccionario) {
+		System.out.println("\n\nMaterias no comunes para cada combinacion de dos carreras:");
+    	ConjuntoTDA conjunto = diccionario.claves();
+        while(!conjunto.conjuntoVacio()) {
+        	int carrera = conjunto.elegir();
+        	conjunto.sacar(carrera);
+        	ConjuntoTDA conjuntoAux = new Conjunto();;
+        	conjuntoAux.inicializarConjunto();
+        	puntoHJ.copiarConjuntoConjunto(conjunto, conjuntoAux);
+        	while(!conjuntoAux.conjuntoVacio()) {
+        		int carrera2 = conjuntoAux.elegir();
+        		System.out.println("\nLas materias no comunes entre la carrera " + carrera + " y la carrera " + carrera2 + " son: ");
+        		ConjuntoTDA diferencia = puntoHJ.materiasNoComunesEntre2Carreras(diccionario, carrera, carrera2);
+        		while(!diferencia.conjuntoVacio()) {
+        			System.out.println("Codigo materia "+ diferencia.elegir());
+        			diferencia.sacar(diferencia.elegir());
+        		}
+        		conjuntoAux.sacar(carrera2);
+        	}
+        }
+    }
 
+    
 
 	private static void cargarDiccionario() throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(file));
