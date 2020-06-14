@@ -13,8 +13,6 @@ public class PuntoE {
         ConjuntoTDA carreras = diccionario.claves();
 
         while (!carreras.conjuntoVacio()) {
-            // Lo defino como byte, asumiendo que las optativas pueden
-            // llegar a un valor de 127.
             int cantidadOptativas = 0;
             int nroCarrera = carreras.elegir();
             carreras.sacar(nroCarrera);

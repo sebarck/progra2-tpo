@@ -26,6 +26,7 @@ public class App {
     private static PuntoE puntoE = new PuntoE();
     private static PuntoF puntoF = new PuntoF();
     private static PuntoHJ puntoHJ = new PuntoHJ();
+    private static PuntoGI puntoGI = new PuntoGI();
     
 
     public static void main(String[] args) throws IOException {
@@ -39,6 +40,8 @@ public class App {
         imprimirMateriasUnicas();
         puntoF.materiasComunes(diccionario);
         imprimirMateriaNoComunes(diccionario);
+        puntoGI.crearCombinacionesComparar80Porciento(diccionario);
+        puntoGI.crearCombinacionesComparar20Porciento(diccionario);
     }
 
  
