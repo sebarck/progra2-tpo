@@ -9,6 +9,16 @@ import static java.lang.String.valueOf;
 import static java.util.regex.Pattern.compile;
 
 public class PuntoE {
+
+    /**
+     * @Tarea Calcular y mostrar la cantidad de materias optativas por carrera
+     * @Parametros DiccionarioMultipleTDA diccionario
+     * @Devuelve
+     * @Precondicion Diccionario inicializado y con csv cargado
+     * @Postcondicion
+     * @Costo
+     **/
+
     public void calcularCantidadOptativasPorCarrera(DiccionarioMultipleTDA diccionario) {
         ConjuntoTDA carreras = diccionario.claves();
 

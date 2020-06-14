@@ -10,12 +10,12 @@ public class PuntoHJ {
 
 	/**
 	 * @Tarea Materias de cada carrera que no comparten con ninguna otra carrera,
-	 *        ordenadas por código de materia, indicando la carrera a la que
+	 *        ordenadas por codigo de materia, indicando la carrera a la que
 	 *        pertenecen.
-	 * @Parámetros DiccionarioMultipleTDA diccionario
+	 * @Parametros DiccionarioMultipleTDA diccionario
 	 * @Devuelve ColaPrioridadTDA
-	 * @Precondición 
-	 * @Postcondición
+	 * @Precondicion
+	 * @Postcondicion
 	 * @Costo 
 	 **/
 

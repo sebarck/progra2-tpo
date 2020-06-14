@@ -7,6 +7,15 @@ import ar.edu.uade.progra2.tpo.misImplementaciones.Conjunto;
 public class PuntoGI {
     private static final PuntoHJ puntoHJ = new PuntoHJ();
 
+    /**
+     * @Tarea Mostrar aquellas carreras que tengan menos de 20% de materias iguales entre si.
+     * @Parametros DiccionarioMultipleTDA diccionario
+     * @Devuelve
+     * @Precondicion Diccionario inicializado y con csv cargado
+     * @Postcondicion
+     * @Costo
+     **/
+
     public void crearCombinacionesComparar20Porciento(DiccionarioMultipleTDA diccionario) {
         ConjuntoTDA conjunto = diccionario.claves();
         String mensajePorcentajeIguales = " hay menos de un 20% de materias de coincidencia de materias";
@@ -32,6 +41,15 @@ public class PuntoGI {
             }
         }
     }
+
+    /**
+     * @Tarea Mostrar aquellas carreras que tengan mas de 80% de materias iguales entre si.
+     * @Parametros DiccionarioMultipleTDA diccionario
+     * @Devuelve
+     * @Precondicion Diccionario inicializado y con csv cargado
+     * @Postcondicion
+     * @Costo
+     **/
 
     public void crearCombinacionesComparar80Porciento (DiccionarioMultipleTDA diccionario) {
         ConjuntoTDA conjunto = diccionario.claves();
