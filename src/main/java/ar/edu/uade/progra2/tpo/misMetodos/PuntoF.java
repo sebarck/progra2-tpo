@@ -46,14 +46,26 @@ public class PuntoF {
         }
         
         ConjuntoTDA resultado=diccionarioComunes.claves();
+        ConjuntoTDA resultado2=diccionarioComunes.claves();
         if(resultado.conjuntoVacio()) {
         	System.out.println("No hay materias comunes en las carreras indicadas.");
         }else {
-        	System.out.print("Los siguientes codigos corresponden a las materias comunes de todas las carreras indicadas: ");
-        	while(!resultado.conjuntoVacio()) {
-             	int nro=resultado.elegir();
-             	resultado.sacar(nro);
-             	System.out.print(nro+", ");
+        	System.out.println("\n");
+        	System.out.println("Los siguientes codigos corresponden a las materias comunes de todas las carreras indicadas: ");
+        	int mayor=0;
+        	while(!resultado.conjuntoVacio()){
+        		mayor=0;
+        		while(!resultado2.conjuntoVacio()) {
+        			int nro2=resultado2.elegir();
+        			if(nro2>mayor) {
+        				mayor=nro2;
+        			}
+        			resultado2.sacar(nro2);
+        		}
+        		System.out.println("Codigo de linea: "+mayor);
+             	diccionarioComunes.eliminar(mayor);
+             	resultado=diccionarioComunes.claves();
+             	resultado2=diccionarioComunes.claves();
              }
         }
        
