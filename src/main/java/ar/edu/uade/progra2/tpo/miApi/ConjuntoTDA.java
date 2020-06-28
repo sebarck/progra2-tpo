@@ -1,61 +1,71 @@
 package ar.edu.uade.progra2.tpo.miApi;
 
+/**
+ * @autores Lopez Gerardo Martin, Monti Sebasti醤, Streule Agustina, Ochoa Ignacio Javier
+ * @grupo 18
+ **/
+/**
+ * @TDA ConjuntoTDA
+ * @Definicion
+ *
+ */
 public interface ConjuntoTDA {
 
-    /**
-     * Inicializa el conjunto definiendo la capacidad
-     * capacidad maxima: cota superior menos cota inferior mas uno
-     */
-    void inicializarConjunto();
+	/**
+	 * @Tarea Inicializa el conjunto definiendo la capacidad capacidad maxima: cota
+	 *        superior menos cota inferior mas uno
+	 * @Parametros
+	 * @Devuelve
+	 * @Precondicion
+	 * @Postcondicion
+	 */
+	void inicializarConjunto();
 
-    /**
-     * Precondici贸n: debe estar inicializado y se debe evaluar si el conjunto ya se encuentra lleno
-     * en tal caso se podria lanzar una excepcion (ConjuntoNoInicializadoException|ConjuntoLlenoException)
-     * <p>
-     * Agrega elemento en el conjunto
-     *
-     * @param elemento
-     */
-    void agregar(int elemento);
+	/**
+	 * @Tarea Agrega elemento en el conjunto.
+	 * @Parametros int elemento
+	 * @Devuelve
+	 * @Precondicion debe estar inicializado y se debe evaluar si el conjunto ya se
+	 *               encuentra lleno
+	 * @Postcondicion
+	 */
+	void agregar(int elemento);
 
-    /**
-     * Precondici贸n: debe estar inicializado y se debe evaluar que el conjunto no este vacio
-     * en tal caso se podria lanzar una excepcion (ConjuntoNoInicializadoException|ConjuntoVacioException)
-     * <p>
-     * Quita elemento del conjunto
-     *
-     * @param elemento
-     */
-    void sacar(int elemento);
+	/**
+	 * @Tarea Quita elemento del conjunto.
+	 * @Parametros int elemento
+	 * @Devuelve
+	 * @Precondicion debe estar inicializado y se debe evaluar que el conjunto no
+	 *               este vacio.
+	 * @Postcondicion
+	 */
+	void sacar(int elemento);
 
-    /**
-     * Precondici贸n: debe estar inicializado y se debe evaluar que el conjunto no este vacio
-     * en tal caso se podria lanzar una excepcion (ConjuntoNoInicializadoException|ConjuntoVacioException)
-     * <p>
-     * Obtiene un elemento NO vacio del conjunto
-     *
-     * @return {@code int} elemento
-     */
-    int elegir();
+	/**
+	 * @Tarea Obtiene un elemento NO vacio del conjunto
+	 * @Parametros
+	 * @Devuelve int elemento
+	 * @Precondicion debe estar inicializado y se debe evaluar que el conjunto no
+	 *               este vacio.
+	 * @Postcondicion
+	 */
+	int elegir();
 
-    /**
-     * Precondici贸n: debe estar inicializado
-     * en tal caso se podria lanzar una excepcion (ConjuntoaNoInicializadoException)
-     *
-     * Evalua si el conjunto se encuentra vacio
-     *
-     * @return {@code boolean} indicando verdadero o falso
-     */
-    boolean conjuntoVacio();
+	/**
+	 * @Tarea Evalua si el conjunto se encuentra vacio.
+	 * @Parametros
+	 * @Devuelve boolean indicando verdadero o falso.
+	 * @Precondicion debe estar inicializado.
+	 * @Postcondicion
+	 */
+	boolean conjuntoVacio();
 
-    /**
-     * Precondici贸n: debe estar inicializado
-     * en tal caso se podria lanzar una excepcion (ConjuntoaNoInicializadoException)
-     * <p>
-     * Evalua si el elemento se encuentra dentro del conjunto
-     *
-     * @param elemento
-     * @return {@code boolean} indicando verdadero o falso
-     */
-    boolean pertenece(int elemento);
+	/**
+	 * @Tarea Evalua si el elemento se encuentra dentro del conjunto.
+	 * @Parametros int elemento.
+	 * @Devuelve boolean indicando verdadero o falso.
+	 * @Precondicion debe estar inicializado.
+	 * @Postcondicion
+	 */
+	boolean pertenece(int elemento);
 }

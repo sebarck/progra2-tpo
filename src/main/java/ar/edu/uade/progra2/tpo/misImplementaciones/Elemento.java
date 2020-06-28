@@ -1,5 +1,8 @@
 package ar.edu.uade.progra2.tpo.misImplementaciones;
-
+/**
+ * @autores Lopez Gerardo Martin, Monti Sebastián, Streule Agustina, Ochoa Ignacio Javier
+ * @grupo 18
+ **/
 public class Elemento {
 
     private int clave;

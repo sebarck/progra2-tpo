@@ -2,7 +2,10 @@ package ar.edu.uade.progra2.tpo.misImplementaciones;
 
 import ar.edu.uade.progra2.tpo.miApi.ConjuntoTDA;
 import ar.edu.uade.progra2.tpo.miApi.DiccionarioMultipleTDA;
-
+/**
+ * @autores Lopez Gerardo Martin, Monti Sebastián, Streule Agustina, Ochoa Ignacio Javier
+ * @grupo 18
+ **/
 public class DiccionarioMultiple implements DiccionarioMultipleTDA {
 
     private Elemento[] elementos;

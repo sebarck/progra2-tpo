@@ -10,102 +10,231 @@ import java.io.IOException;
 import ar.edu.uade.progra2.tpo.miApi.ColaPrioridadTDA;
 import ar.edu.uade.progra2.tpo.miApi.ConjuntoTDA;
 import ar.edu.uade.progra2.tpo.miApi.DiccionarioMultipleTDA;
+import ar.edu.uade.progra2.tpo.miApi.DiccionarioSimpleTDA;
+import ar.edu.uade.progra2.tpo.miApi.GrafoTDA;
 import ar.edu.uade.progra2.tpo.misImplementaciones.ColaPrioridad;
 import ar.edu.uade.progra2.tpo.misImplementaciones.Conjunto;
 import ar.edu.uade.progra2.tpo.misImplementaciones.DiccionarioMultiple;
+import ar.edu.uade.progra2.tpo.misImplementaciones.Grafo;
 import ar.edu.uade.progra2.tpo.misMetodos.*;
 
+/**
+ * @autores Lopez Gerardo Martin, Monti Sebastián, Streule Agustina, Ochoa
+ *          Ignacio Javier
+ * @grupo 18
+ **/
 public class App {
 
-    private static String file = "src/main/resources/Materias.csv";
-    private static DiccionarioMultipleTDA diccionario;
-    private static PuntoA puntoA = new PuntoA();
-    private static PuntoB puntoB = new PuntoB();
-    private static PuntoC puntoC = new PuntoC();
-    private static PuntoD puntoD = new PuntoD();
-    private static PuntoE puntoE = new PuntoE();
-    private static PuntoF puntoF = new PuntoF();
-    private static PuntoHJ puntoHJ = new PuntoHJ();
-    private static PuntoGI puntoGI = new PuntoGI();
-    
+	private static String file = "src/main/resources/Materias.csv";
+	private static DiccionarioMultipleTDA diccionario;
+	private static GrafoTDA grafo;
+	private static Metodos metodos = new Metodos();
+	private static int PESO = 1;
 
-    public static void main(String[] args) throws IOException {
-        inicializarDiccionario();
-        cargarDiccionario();
-        imprimirCantidadMaterias();
-        puntoB.porcentajeMateriasInformaticaPorCarrera(diccionario);
-        puntoC.porcentajeMateriasCienciasBasicasPorCarrera(diccionario);
-        puntoD.porcentajeMateriasCienciasSocialesPorCarrera(diccionario);
-        puntoE.calcularCantidadOptativasPorCarrera(diccionario);
-        imprimirMateriasUnicas();
-        puntoF.materiasComunes(diccionario);
-        imprimirMateriaNoComunes(diccionario);
-        puntoGI.crearCombinacionesComparar80Porciento(diccionario);
-        puntoGI.crearCombinacionesComparar20Porciento(diccionario);
-    }
-
- 
-    private static void imprimirCantidadMaterias() {
-    	System.out.println("\nCantidad de materias por carrera:");
-    	ConjuntoTDA conjunto = diccionario.claves();
-        while(!conjunto.conjuntoVacio()) {
-        	int carrera = conjunto.elegir();
-        	System.out.println("La carrera " + carrera + " tiene "  + puntoA.cantidadMateriasPorCarrera(diccionario, carrera) + " materias.");
-        	conjunto.sacar(carrera);
-        }
+	public static void main(String[] args) throws IOException {
+		inicializarDiccionario();
+		inicializarGrafo();
+		cargarDesdeArchivo();
+		mostrarGrafo();
+		imprimirCantidadMaterias();
+		imprimirPorcentajeMateriasInformaticaPorCarrera();
+		imprimirPorcentajeMateriasCienciasBasicasPorCarrera();
+		imprimirPorcentajeMateriasCienciasSocialesPorCarrera();
+		imprimirCantOptativasPorCarrera();
+		imprimirMateriasUnicas();
+//		metodos.materiasComunes(diccionario);
+		imprimirMateriaNoComunes();
+//		metodos.crearCombinacionesComparar80Porciento(diccionario);
+//       metodos.crearCombinacionesComparar20Porciento(diccionario);
+		imprimirMateriasMaxCorrelativasPrecedentes();
+		imprimirPorcentajeMateriasSinCorrelativas();
+		imprimirMateriasMaxCorrelativasSubsiguientes();
 	}
-    
-    private static void imprimirMateriasUnicas() {
-    	System.out.println("\nMaterias de cada carrera que no comparten con ninguna otra carrera:");
-    	ColaPrioridadTDA cola = new ColaPrioridad();
-    	cola.inicializarCola();
-    	cola = puntoHJ.materiasUnicasPorCarrera(diccionario);
-    	while(!cola.colaVacia()) {
+
+	private static void imprimirCantidadMaterias() {
+		System.out.println("\nCantidad de materias por carrera:");
+		ConjuntoTDA conjunto = diccionario.claves();
+		while (!conjunto.conjuntoVacio()) {
+			int carrera = conjunto.elegir();
+			System.out.println("La carrera " + carrera + " tiene "
+					+ metodos.cantidadMateriasPorCarrera(diccionario, carrera) + " materias.");
+			conjunto.sacar(carrera);
+		}
+	}
+
+	private static void imprimirMateriasUnicas() {
+		System.out.println("\nMaterias de cada carrera que no comparten con ninguna otra carrera:");
+		ColaPrioridadTDA cola = new ColaPrioridad();
+		cola.inicializarCola();
+		cola = metodos.materiasUnicasPorCarrera(diccionario);
+		while (!cola.colaVacia()) {
 			System.out.println("Codigo materia: " + cola.prioridad() + " - Carrera: " + cola.primero());
 			cola.desacolar();
 		}
 	}
-    
-	private static void imprimirMateriaNoComunes(DiccionarioMultipleTDA diccionario) {
+
+	private static void imprimirPorcentajeMateriasCienciasSocialesPorCarrera() {
+		System.out.println("\nPorcentaje de materias de Ciencias Sociales por Carrera:");
+		DiccionarioSimpleTDA resultado = metodos.porcentajeMateriasCienciasSocialesPorCarrera(diccionario);
+		mostrarDS(resultado);
+
+	}
+
+	private static void imprimirPorcentajeMateriasInformaticaPorCarrera() {
+		System.out.println("\nPorcentaje de materias de Informatica por Carrera:");
+		DiccionarioSimpleTDA resultado = metodos.porcentajeMateriasInformaticaPorCarrera(diccionario);
+		mostrarDS(resultado);
+
+	}
+
+	private static void imprimirPorcentajeMateriasCienciasBasicasPorCarrera() {
+		System.out.println("\nPorcentaje de materias de Ciencias Basicas por Carrera:");
+		DiccionarioSimpleTDA resultado = metodos.porcentajeMateriasCienciasBasicasPorCarrera(diccionario);
+		mostrarDS(resultado);
+
+	}
+
+	private static void mostrarDS(DiccionarioSimpleTDA origen) {
+		ConjuntoTDA cjtoClaves = origen.claves();
+		while (!cjtoClaves.conjuntoVacio()) {
+			int c = cjtoClaves.elegir();
+			cjtoClaves.sacar(c);
+			Double valor = origen.recuperar(c);
+			System.out.print("Carrera: " + c + " | Porcentaje materias de  " + valor + "%; ");
+			System.out.println();
+		}
+	}
+
+	private static void imprimirCantOptativasPorCarrera() {
+		System.out.println("\nCantidad de optativas por carrera:");
+		DiccionarioSimpleTDA resultado = metodos.calcularCantidadOptativasPorCarrera(diccionario);
+		ConjuntoTDA cjtoClaves = resultado.claves();
+		while (!cjtoClaves.conjuntoVacio()) {
+			int c = cjtoClaves.elegir();
+			cjtoClaves.sacar(c);
+			Double valor = resultado.recuperar(c);
+			String codigoCarrera = "El codigo de carrera " + c;
+			if (valor > 0) {
+				// Simplemente para que quede lindo en caso de que la cantidad sea 1
+				final String stringMateria = (valor == 1) ? " materia optativa" : " materias optativas.";
+
+				System.out.println(codigoCarrera + " posee " + valor + stringMateria);
+			} else {
+				System.out.println(codigoCarrera + " no posee materias optativas.");
+			}
+			System.out.println();
+		}
+
+	}
+
+	private static void imprimirMateriaNoComunes() {
 		System.out.println("\n\nMaterias no comunes para cada combinacion de dos carreras:");
-    	ConjuntoTDA conjunto = diccionario.claves();
-        while(!conjunto.conjuntoVacio()) {
-        	int carrera = conjunto.elegir();
-        	conjunto.sacar(carrera);
-        	ConjuntoTDA conjuntoAux = new Conjunto();;
-        	conjuntoAux.inicializarConjunto();
-        	puntoHJ.copiarConjuntoConjunto(conjunto, conjuntoAux);
-        	while(!conjuntoAux.conjuntoVacio()) {
-        		int carrera2 = conjuntoAux.elegir();
-        		System.out.println("\nLas materias no comunes entre la carrera " + carrera + " y la carrera " + carrera2 + " son: ");
-        		ConjuntoTDA diferencia = puntoHJ.materiasNoComunesEntre2Carreras(diccionario, carrera, carrera2);
-        		while(!diferencia.conjuntoVacio()) {
-        			System.out.println("Codigo materia "+ diferencia.elegir());
-        			diferencia.sacar(diferencia.elegir());
-        		}
-        		conjuntoAux.sacar(carrera2);
-        	}
-        }
-    }
+		ConjuntoTDA conjunto = diccionario.claves();
+		while (!conjunto.conjuntoVacio()) {
+			int carrera = conjunto.elegir();
+			conjunto.sacar(carrera);
+			ConjuntoTDA conjuntoAux = new Conjunto();
+			conjuntoAux.inicializarConjunto();
+			metodos.copiarConjuntoConjunto(conjunto, conjuntoAux);
+			while (!conjuntoAux.conjuntoVacio()) {
+				int carrera2 = conjuntoAux.elegir();
+				System.out.println("\nLas materias no comunes entre la carrera " + carrera + " y la carrera " + carrera2
+						+ " son: ");
+				ConjuntoTDA diferencia = metodos.materiasNoComunesEntre2Carreras(diccionario, carrera, carrera2);
+				while (!diferencia.conjuntoVacio()) {
+					System.out.println("Codigo materia " + diferencia.elegir());
+					diferencia.sacar(diferencia.elegir());
+				}
+				conjuntoAux.sacar(carrera2);
+			}
+		}
+	}
 
-    
+	private static void imprimirMateriasMaxCorrelativasPrecedentes() {
+		ColaPrioridadTDA cola = metodos.materiasMaxCorrelativasPrecedentes(grafo);
+		System.out.println("\nLa/s materia/s con mayor cantidad de correlativas precedentes inmediatas son:\n ");
+		while (!cola.colaVacia()) {
+			System.out.println(
+					"Materia: " + cola.prioridad() + "|| Cantidad de correlativas precedentes: " + cola.primero());
+			cola.desacolar();
+		}
+	}
 
-	private static void cargarDiccionario() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        String line;
-        reader.readLine();
-        while ((line = reader.readLine()) != null) {
-            String[] splitLine = line.split(";");
-            int nroCarrera = Integer.valueOf(splitLine[0]);
-            int codigoMateria = Integer.valueOf(splitLine[1]);
-            System.out.format("Codigo carrera %d | Codigo materia %d\n", nroCarrera, codigoMateria);
-            diccionario.agregar(nroCarrera, codigoMateria);
-        }
-        reader.close();
-    }
+	private static void imprimirMateriasMaxCorrelativasSubsiguientes() {
+		ColaPrioridadTDA cola = metodos.materiasMayorCantCorrelativasSubsiguientes(grafo);
+		System.out.println("\nLa/s materia/s con mayor cantidad de correlativas subsiguientes inmediatas son: \n ");
+		while (!cola.colaVacia()) {
+			System.out.println(
+					"Materia: " + cola.prioridad() + "|| Cantidad de correlativas precedentes: " + cola.primero());
+			cola.desacolar();
+		}
+	}
+	private static void cargarDesdeArchivo() throws IOException {
+		BufferedReader reader = new BufferedReader(new FileReader(file));
+		String line;
+		reader.readLine();
+		int nroCarrera;
+		int codigoMateria;
+		String codigoMateriaPrecedente;
 
-    private static void inicializarDiccionario() {
-        diccionario = new DiccionarioMultiple();
-        diccionario.inicializarDiccionarioMultiple();
-    }
+		while ((line = reader.readLine()) != null) {
+			String[] splitLine = line.split(";");
+			nroCarrera = Integer.valueOf(splitLine[0]);
+			codigoMateria = Integer.valueOf(splitLine[1]);
+			codigoMateriaPrecedente = splitLine[2];
+			System.out.format("Codigo carrera %d | Codigo materia %d\n", nroCarrera, codigoMateria);
+			diccionario.agregar(nroCarrera, codigoMateria);
+			crearGrafoMaterias(codigoMateria, codigoMateriaPrecedente);
+		}
+		reader.close();
+	}
+
+	private static void crearGrafoMaterias(int codigoMateria, String codigoMateriaPrecedente) {
+		ConjuntoTDA vertices = grafo.vertices();
+
+		if (!vertices.pertenece(codigoMateria)) {
+			grafo.agregarVertice(codigoMateria);
+		}
+		if (!codigoMateriaPrecedente.equals("")) {
+			int materiaPrecedente = Integer.valueOf(codigoMateriaPrecedente);
+			if (vertices.pertenece(materiaPrecedente) && !grafo.existeArista(codigoMateria, materiaPrecedente)) {
+				grafo.agregarArista(codigoMateria, materiaPrecedente, PESO);
+			}
+		}
+	}
+
+	private static void mostrarGrafo() {
+		ConjuntoTDA verticesOrigen = grafo.vertices(), verticesDest;
+		int vo, vd;
+		while (!verticesOrigen.conjuntoVacio()) {
+			vo = verticesOrigen.elegir();
+			verticesOrigen.sacar(vo);
+			System.out.println("Materia: " + vo);
+			verticesDest = grafo.vertices();
+			while (!verticesDest.conjuntoVacio()) {
+				vd = verticesDest.elegir();
+				verticesDest.sacar(vd);
+				if (vo != vd && grafo.existeArista(vo, vd)) {
+					System.out.println("(" + vd + "," + grafo.pesoArista(vo, vd) + ")");
+				}
+			}
+		}
+	}
+
+	private static void imprimirPorcentajeMateriasSinCorrelativas() {
+		Double porcentaje = metodos.porcentajeMateriasSinCorrelativas(grafo);
+		System.out.println("El porcentaje de materias que no tienen correlativas precedentes ni subsiguientes son : "
+				+ porcentaje + "%");
+
+	}
+
+	private static void inicializarDiccionario() {
+		diccionario = new DiccionarioMultiple();
+		diccionario.inicializarDiccionarioMultiple();
+	}
+
+	private static void inicializarGrafo() {
+		grafo = new Grafo();
+		grafo.inicializarGrafo();
+	}
 }

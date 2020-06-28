@@ -1,7 +1,10 @@
 package ar.edu.uade.progra2.tpo.misImplementaciones;
 
 import ar.edu.uade.progra2.tpo.miApi.ColaPrioridadTDA;
-
+/**
+ * @autores Lopez Gerardo Martin, Monti Sebastián, Streule Agustina, Ochoa Ignacio Javier
+ * @grupo 18
+ **/
 public class ColaPrioridad implements ColaPrioridadTDA{
 
 	class Elem {
