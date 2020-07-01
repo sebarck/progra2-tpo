@@ -299,7 +299,7 @@ public class Metodos {
 	 * @Precondicion Diccionario inicializado.
 	 * @Postcondicion Imprime materias de cada carrera que no comparten con ninguna
 	 *                otra carrera, ordenadas por codigo de materia
-	 * @Costo Cuadratico // Costo espacial: 7
+	 * @Costo Cuadratico // Costo espacial: 9
 	 **/
 
 	public void materiasUnicasPorCarrera(DiccionarioMultipleTDA diccionario) {
@@ -376,7 +376,7 @@ public class Metodos {
 					}
 
 				}
-				if ((materiascomunes * 100) / nromaterias <= 20) {
+				if ((materiascomunes * 100) / nromaterias < 20) {
 					System.out.println("La carrera nro " + carrera
 							+ " tiene un 20% o menos de materias comunes con la carrera nro " + carrera2);
 				}
@@ -394,7 +394,7 @@ public class Metodos {
 
 					}
 				}
-				if ((materiascomunes * 100) / nromaterias <= 20) {
+				if ((materiascomunes * 100) / nromaterias < 20) {
 					System.out.println("La carrera nro " + carrera2
 							+ " tiene un 20% o menos de materias comunes con la carrera nro " + carrera);
 				}
@@ -409,7 +409,7 @@ public class Metodos {
 	 * @Devuelve
 	 * @Precondicion Diccionario inicializado.
 	 * @Postcondicion Imprime las materias no comunes entre dos carreras.
-	 * @Costo Cubico // Costo espacial: 5
+	 * @Costo Cubico // Costo espacial: 16
 	 **/
 
 	public void materiasNoComunesEntre2Carreras(DiccionarioMultipleTDA diccionario) {
@@ -450,7 +450,7 @@ public class Metodos {
 	 * @Precondicion El grafo debe estar inicializado
 	 * @Postcondicion Imprime la/s materia/s con mayor cantidad de correlativas
 	 *                precedentes inmediatas, ordenadas por código.
-	 * @Costo Lineal * 2 // Costo espacial: 3
+	 * @Costo Lineal  // Costo espacial: 4
 	 **/
 
 	public void materiasMaxCorrelativasPrecedentes(GrafoTDA grafo) {
@@ -494,7 +494,7 @@ public class Metodos {
 	 * @Precondicion El grafo debe de estar inicializado
 	 * @Postcondicion Imprimira en pantalla las materias con mayor cantidad de
 	 *                correlativas.
-	 * @Costo Lineal// Costo espacial: 3
+	 * @Costo Lineal// Costo espacial: 4
 	 **/
 
 	public void materiasMayorCantCorrelativasSubsiguientes(GrafoTDA grafo) {
@@ -538,7 +538,7 @@ public class Metodos {
 	 * @Precondicion El grafo debe de estar inicializado
 	 * @Postcondicion debe imprimir el porcentaje de materias tienen correlativas
 	 *                precedentes ni subsiguientes.
-	 * @Costo Lineal // Costo espacial: 1
+	 * @Costo Lineal // Costo espacial: 2
 	 **/
 
 	public void porcentajeMateriasSinCorrelativas(GrafoTDA grafo) {
@@ -564,7 +564,7 @@ public class Metodos {
 	 * @Parametros int vertice, GrafoTDA grafo
 	 * @Devuelve boolean tieneCorrelativas
 	 * @Precondicion El grafo debe estar inicializado
-	 * @Postcondicion
+	 * @Postcondicion Devuelve true or false si la materia tiene correlativas o no.
 	 * @Costo Lineal// Costo espacial: 1
 	 **/
 	private boolean tieneCorrelativas(int vertice, GrafoTDA grafo) {
@@ -588,7 +588,7 @@ public class Metodos {
 	 * @Parametros ConjuntoTDA c1, ConjuntoTDA c2
 	 * @Devuelve ConjuntoTDA conjunto (el resultado de la diferencia)
 	 * @Precondicion Los conjuntos deben estar inicializados
-	 * @Postcondicion
+	 * @Postcondicion Devuelve la diferencia entre dos conjuntos.
 	 * @Costo Lineal // Costo espacial: 1
 	 **/
 	private ConjuntoTDA diferencia(ConjuntoTDA c1, ConjuntoTDA c2) {
@@ -608,11 +608,11 @@ public class Metodos {
 	}
 
 	/**
-	 * @Tarea Une 2 conjuntos
+	 * @Tarea Realiza la union entre dos conjuntos.
 	 * @Parametros ConjuntoTDA c1, ConjuntoTDA c2
 	 * @Devuelve ConjuntoTDA conjunto (el resultado de la unión)
 	 * @Precondicion Los conjuntos deben estar inicializados
-	 * @Postcondicion
+	 * @Postcondicion Devuelve la union entre dos conjuntos.
 	 * @Costo Lineal // Costo espacial: 1
 	 **/
 	private ConjuntoTDA union(ConjuntoTDA c1, ConjuntoTDA c2) {
@@ -630,12 +630,12 @@ public class Metodos {
 	}
 
 	/**
-	 * @Tarea Haya la diferencia simetrica entre 2 conjuntos
+	 * @Tarea Realiza la diferencia simetrica entre 2 conjuntos
 	 * @Parametros ConjuntoTDA c1, ConjuntoTDA c2
 	 * @Devuelve ConjuntoTDA
 	 * @Precondicion Los conjuntos deben estar inicializados
-	 * @Postcondicion
-	 * @Costo Lineal // Costo espacial: 5
+	 * @Postcondicion Devuelve la diferencia simetrica entre 2 conjuntos.
+	 * @Costo Lineal // Costo espacial: 10
 	 **/
 	private ConjuntoTDA diferenciaSimetrica(ConjuntoTDA c1, ConjuntoTDA c2) {
 		ConjuntoTDA conjunto = new Conjunto();
@@ -665,7 +665,7 @@ public class Metodos {
 	 * @Parametros ConjuntoTDA origen, ConjuntoTDA destino
 	 * @Devuelve
 	 * @Precondicion Los conjuntos deben estar inicializados
-	 * @Postcondicion
+	 * @Postcondicion Pasa el contenido de un conjunto a otro.
 	 * @Costo Lineal // Costo espacial: 0
 	 **/
 	private void pasarConjuntoConjunto(ConjuntoTDA origen, ConjuntoTDA destino) {
@@ -682,7 +682,7 @@ public class Metodos {
 	 * @Parametros ConjuntoTDA origen, ConjuntoTDA destino a copiar
 	 * @Devuelve
 	 * @Precondicion El conjunto debe estar inicializado
-	 * @Postcondicion
+	 * @Postcondicion Copia el contenido de un conjunto a otro.
 	 * @Costo Lineal // Costo espacial: 1
 	 **/
 	public void copiarConjuntoConjunto(ConjuntoTDA origen, ConjuntoTDA destino) {
@@ -706,7 +706,7 @@ public class Metodos {
 	 * @Parametros DiccionarioMultipleTDA diccionario, String prefijoMateria
 	 * @Devuelve
 	 * @Precondicion Debe existir alguna carrera
-	 * @Postcondicion Debe imprimir el porcentaje de materias por carrera segun el
+	 * @Postcondicion Imprme el porcentaje de materias por carrera segun el
 	 *                prefijo enviado.
 	 * @Costo Cuadrática // Costo espacial: 2
 	 **/
@@ -743,7 +743,7 @@ public class Metodos {
 	 * @Parametros ConjuntoTDA conjunto a vaciar
 	 * @Devuelve
 	 * @Precondicion Conjunto inicializado
-	 * @Postcondicion
+	 * @Postcondicion Vacia al conjunto.
 	 * @Costo Lineal // Costo espacial: 0
 	 **/
 	private void vaciarConjunto(ConjuntoTDA conjunto) {
@@ -759,7 +759,7 @@ public class Metodos {
 	 * @Parametros GrafoTDA grafo a utilizar, int v
 	 * @Devuelve int cantidad (De vertices adyacentes)
 	 * @Precondicion El grafo debe estar inicializado
-	 * @Postcondicion
+	 * @Postcondicion Devuelve cantidad de vertices adyacentes que tiene el vertice de un grafo.
 	 * @Costo Lineal // Costo espacial: 1
 	 **/
 	private int cantidadVerticesAdyacentes(GrafoTDA grafo, int v) {
@@ -783,7 +783,7 @@ public class Metodos {
 	 * @Parametros GrafoTDA grafo a utilizar, int v
 	 * @Devuelve int cantidad (De vertices subsiguientes)
 	 * @Precondicion El grafo debe estar inicializado
-	 * @Postcondicion
+	 * @Postcondicion Devuelve cantidad de vertices subsiguientes que tiene el vertice de un grafo.
 	 * @Costo Lineal // Costo espacial: 1
 	 **/
 	private int cantidadVerticesSubsiguientes(GrafoTDA grafo, int v) {
@@ -801,77 +801,4 @@ public class Metodos {
 		}
 		return cantidad;
 	}
-
-	/**
-	 * @Tarea Hace un print de aquellas carreras que compartan mas del 80% o menos
-	 *        20% con otra carrera.
-	 * @Parametros DiccionarioMultipleTDA diccionario que se desea analizar
-	 * @Devuelve
-	 * @Precondicion El diccionario debe estar inicializado
-	 * @Postcondicion
-	 * @Costo Cubico + Lineal // Costo espacial: 5
-	 **/
-	public void porcentajeDeMateriasComunes(DiccionarioMultipleTDA diccionario) {
-		System.out.println("\n");
-		ConjuntoTDA conjunto = diccionario.claves();
-		int carrera, carrera2, nromaterias, materiascomunes, materia;
-		nromaterias = 0;
-		materiascomunes = 0;
-		ConjuntoTDA materias, materiasAux, materiasAux2, conjuntoAux;
-		conjuntoAux = new Conjunto();
-		while (!conjunto.conjuntoVacio()) {
-			carrera = conjunto.elegir();
-			conjunto.sacar(carrera);
-			conjuntoAux.inicializarConjunto();
-			copiarConjuntoConjunto(conjunto, conjuntoAux);
-			while (!conjuntoAux.conjuntoVacio()) {
-				carrera2 = conjuntoAux.elegir();
-				conjuntoAux.sacar(carrera2);
-				materias = diccionario.recuperar(carrera);
-				materiasAux = diccionario.recuperar(carrera2);
-				materiasAux2 = diccionario.recuperar(carrera);
-				while (!materias.conjuntoVacio()) {
-					try {
-						materia = materias.elegir();
-						materias.sacar(materia);
-						nromaterias++;
-						if (materiasAux.pertenece(materia)) {
-							materiascomunes++;
-						}
-					} catch (Exception e) {
-
-					}
-				}
-				if ((materiascomunes * 100) / nromaterias > 80) {
-					System.out.println("La carrera nro " + carrera
-							+ " tiene un 80% o mas de materias comunes con la carrera nro " + carrera2);
-				} else if ((materiascomunes * 100) / nromaterias <= 20) {
-					System.out.println("La carrera nro " + carrera
-							+ " tiene un 20% o menos de materias comunes con la carrera nro " + carrera2);
-				}
-				nromaterias = 0;
-				materiascomunes = 0;
-				while (!materiasAux.conjuntoVacio()) {
-					try {
-						materia = materiasAux.elegir();
-						materiasAux.sacar(materia);
-						nromaterias++;
-						if (materiasAux2.pertenece(materia)) {
-							materiascomunes++;
-						}
-					} catch (Exception e) {
-
-					}
-				}
-				if ((materiascomunes * 100) / nromaterias > 80) {
-					System.out.println("La carrera nro " + carrera2
-							+ " tiene un 80% o mas de materias comunes con la carrera nro " + carrera);
-				} else if ((materiascomunes * 100) / nromaterias < 20) {
-					System.out.println("La carrera nro " + carrera2
-							+ " tiene un 20% o menos de materias comunes con la carrera nro " + carrera);
-				}
-			}
-		}
-	}
-
 }

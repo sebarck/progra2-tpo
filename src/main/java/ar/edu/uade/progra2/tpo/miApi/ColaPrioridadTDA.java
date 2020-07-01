@@ -21,7 +21,7 @@ public interface ColaPrioridadTDA {
 	
 	/**
 	@Tarea Agrega un elemento a la cola con prioridad
-	@Parametros x,p
+	@Parametros int x,int p
 	@Devuelve
 	@Precondicion cola inicializada
 	@Postcondicion Elemento en la cola.
