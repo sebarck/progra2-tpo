@@ -4,6 +4,9 @@ package ar.edu.uade.progra2.tpo.misMetodos;
 import static java.lang.String.valueOf;
 import static java.util.regex.Pattern.compile;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.regex.Matcher;
 
 import ar.edu.uade.progra2.tpo.miApi.ColaPrioridadTDA;
@@ -450,7 +453,7 @@ public class Metodos {
 	 * @Precondicion El grafo debe estar inicializado
 	 * @Postcondicion Imprime la/s materia/s con mayor cantidad de correlativas
 	 *                precedentes inmediatas, ordenadas por código.
-	 * @Costo Lineal  // Costo espacial: 4
+	 * @Costo Lineal // Costo espacial: 4
 	 **/
 
 	public void materiasMaxCorrelativasPrecedentes(GrafoTDA grafo) {
@@ -706,8 +709,8 @@ public class Metodos {
 	 * @Parametros DiccionarioMultipleTDA diccionario, String prefijoMateria
 	 * @Devuelve
 	 * @Precondicion Debe existir alguna carrera
-	 * @Postcondicion Imprme el porcentaje de materias por carrera segun el
-	 *                prefijo enviado.
+	 * @Postcondicion Imprme el porcentaje de materias por carrera segun el prefijo
+	 *                enviado.
 	 * @Costo Cuadrática // Costo espacial: 2
 	 **/
 	private void porcentajeMaterias(DiccionarioMultipleTDA diccionario, String prefijoMateria) {
@@ -759,7 +762,8 @@ public class Metodos {
 	 * @Parametros GrafoTDA grafo a utilizar, int v
 	 * @Devuelve int cantidad (De vertices adyacentes)
 	 * @Precondicion El grafo debe estar inicializado
-	 * @Postcondicion Devuelve cantidad de vertices adyacentes que tiene el vertice de un grafo.
+	 * @Postcondicion Devuelve cantidad de vertices adyacentes que tiene el vertice
+	 *                de un grafo.
 	 * @Costo Lineal // Costo espacial: 1
 	 **/
 	private int cantidadVerticesAdyacentes(GrafoTDA grafo, int v) {
@@ -783,7 +787,8 @@ public class Metodos {
 	 * @Parametros GrafoTDA grafo a utilizar, int v
 	 * @Devuelve int cantidad (De vertices subsiguientes)
 	 * @Precondicion El grafo debe estar inicializado
-	 * @Postcondicion Devuelve cantidad de vertices subsiguientes que tiene el vertice de un grafo.
+	 * @Postcondicion Devuelve cantidad de vertices subsiguientes que tiene el
+	 *                vertice de un grafo.
 	 * @Costo Lineal // Costo espacial: 1
 	 **/
 	private int cantidadVerticesSubsiguientes(GrafoTDA grafo, int v) {
@@ -801,4 +806,83 @@ public class Metodos {
 		}
 		return cantidad;
 	}
+
+	/**
+	 * @Tarea Muestra un grafo.
+	 * @Parametros GrafoTDA grafo a utilizar.
+	 * @Devuelve
+	 * @Precondicion El grafo debe estar inicializado
+	 * @Postcondicion Imprime los vertices de un grafo y sus aristas.
+	 * @Costo Cuadratica // Costo espacial: 2
+	 **/
+	public void mostrarGrafo(GrafoTDA grafo) {
+		ConjuntoTDA verticesOrigen = grafo.vertices(), verticesDest;
+		int vo, vd;
+		while (!verticesOrigen.conjuntoVacio()) {
+			vo = verticesOrigen.elegir();
+			verticesOrigen.sacar(vo);
+			System.out.println("Materia: " + vo);
+			verticesDest = grafo.vertices();
+			while (!verticesDest.conjuntoVacio()) {
+				vd = verticesDest.elegir();
+				verticesDest.sacar(vd);
+				if (vo != vd && grafo.existeArista(vo, vd)) {
+					System.out.println("(" + vd + "," + grafo.pesoArista(vo, vd) + ")");
+				}
+			}
+		}
+	}
+
+	/**
+	 * @Tarea Agregar materias a un grafo.
+	 * @Parametros GrafoTDA grafo a utilizar, int codigoMateria, String
+	 *             codigoMateriaPrecedente
+	 * @Devuelve
+	 * @Precondicion El grafo debe estar inicializado
+	 * @Postcondicion Agrega vertices y aristas al grafo.
+	 * @Costo Lineal // Costo espacial: 1
+	 **/
+	private void agregarMateriaGrafo(GrafoTDA grafo, int codigoMateria, String codigoMateriaPrecedente) {
+		ConjuntoTDA vertices = grafo.vertices();
+		int PESO = 1;
+		if (!vertices.pertenece(codigoMateria)) {
+			grafo.agregarVertice(codigoMateria);
+		}
+		if (!codigoMateriaPrecedente.equals("")) {
+			int materiaPrecedente = Integer.valueOf(codigoMateriaPrecedente);
+			if (vertices.pertenece(materiaPrecedente) && !grafo.existeArista(codigoMateria, materiaPrecedente)) {
+				grafo.agregarArista(codigoMateria, materiaPrecedente, PESO);
+			}
+		}
+	}
+
+	/**
+	 * @Tarea Carga diccionario y grafo con el contenido de un archivo.
+	 * @Parametros DiccionarioMultipleTDA diccionario, GrafoTDA grafo
+	 * @Devuelve
+	 * @Precondicion El archivo debe existir.
+	 * @Postcondicion Diccionario y grafo cargados.
+	 * @Costo Lineal // Costo espacial: 0
+	 **/
+	public void cargarDesdeArchivo(DiccionarioMultipleTDA diccionario, GrafoTDA grafo) throws IOException {
+		String file = "src/main/resources/Materias.csv";
+		BufferedReader reader = new BufferedReader(new FileReader(file));
+		String line;
+		reader.readLine();
+		int nroCarrera;
+		int codigoMateria;
+		String codigoMateriaPrecedente;
+
+		while ((line = reader.readLine()) != null) {
+			String[] splitLine = line.split(";");
+			nroCarrera = Integer.valueOf(splitLine[0]);
+			codigoMateria = Integer.valueOf(splitLine[1]);
+			codigoMateriaPrecedente = splitLine[2];
+			System.out.format("Codigo carrera %d | Codigo materia %d\n", nroCarrera, codigoMateria);
+			diccionario.agregar(nroCarrera, codigoMateria);
+			agregarMateriaGrafo(grafo, codigoMateria, codigoMateriaPrecedente);
+		}
+		reader.close();
+	}
+
 }

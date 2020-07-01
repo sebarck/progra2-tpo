@@ -3,11 +3,8 @@
  */
 package ar.edu.uade.progra2.tpo.misAplicaciones;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 
-import ar.edu.uade.progra2.tpo.miApi.ConjuntoTDA;
 import ar.edu.uade.progra2.tpo.miApi.DiccionarioMultipleTDA;
 import ar.edu.uade.progra2.tpo.miApi.GrafoTDA;
 import ar.edu.uade.progra2.tpo.misImplementaciones.DiccionarioMultiple;
@@ -21,11 +18,9 @@ import ar.edu.uade.progra2.tpo.misMetodos.Metodos;
  **/
 public class App {
 
-	private static String file = "src/main/resources/Materias.csv";
 	private static DiccionarioMultipleTDA diccionario;
 	private static GrafoTDA grafo;
 	private static Metodos metodos = new Metodos();
-	private static int PESO = 1;
 
 	public static void main(String[] args) throws IOException {
 		// Se inicializa el diccionario.
@@ -33,9 +28,9 @@ public class App {
 		// Se inicializa el grafo.
 		inicializarGrafo();
 		// Se carga el diccionario y el grafo.
-		cargarDesdeArchivo();
+		metodos.cargarDesdeArchivo(diccionario, grafo);
 		System.out.println("\nSe creo el siguiente grafo con las materias y sus correlativas");
-		mostrarGrafo();
+		metodos.mostrarGrafo(grafo);
 		System.out.println("\n-Punto 2");
 		metodos.cantidadMateriasPorCarrera(diccionario);
 		metodos.porcentajeMateriasInformaticaPorCarrera(diccionario);
@@ -51,58 +46,6 @@ public class App {
 		metodos.materiasMaxCorrelativasPrecedentes(grafo);
 		metodos.porcentajeMateriasSinCorrelativas(grafo);
 		metodos.materiasMayorCantCorrelativasSubsiguientes(grafo);
-	}
-
-	private static void cargarDesdeArchivo() throws IOException {
-		BufferedReader reader = new BufferedReader(new FileReader(file));
-		String line;
-		reader.readLine();
-		int nroCarrera;
-		int codigoMateria;
-		String codigoMateriaPrecedente;
-
-		while ((line = reader.readLine()) != null) {
-			String[] splitLine = line.split(";");
-			nroCarrera = Integer.valueOf(splitLine[0]);
-			codigoMateria = Integer.valueOf(splitLine[1]);
-			codigoMateriaPrecedente = splitLine[2];
-			System.out.format("Codigo carrera %d | Codigo materia %d\n", nroCarrera, codigoMateria);
-			diccionario.agregar(nroCarrera, codigoMateria);
-			agregarMateriaGrafo(codigoMateria, codigoMateriaPrecedente);
-		}
-		reader.close();
-	}
-
-	private static void agregarMateriaGrafo(int codigoMateria, String codigoMateriaPrecedente) {
-		ConjuntoTDA vertices = grafo.vertices();
-
-		if (!vertices.pertenece(codigoMateria)) {
-			grafo.agregarVertice(codigoMateria);
-		}
-		if (!codigoMateriaPrecedente.equals("")) {
-			int materiaPrecedente = Integer.valueOf(codigoMateriaPrecedente);
-			if (vertices.pertenece(materiaPrecedente) && !grafo.existeArista(codigoMateria, materiaPrecedente)) {
-				grafo.agregarArista(codigoMateria, materiaPrecedente, PESO);
-			}
-		}
-	}
-
-	private static void mostrarGrafo() {
-		ConjuntoTDA verticesOrigen = grafo.vertices(), verticesDest;
-		int vo, vd;
-		while (!verticesOrigen.conjuntoVacio()) {
-			vo = verticesOrigen.elegir();
-			verticesOrigen.sacar(vo);
-			System.out.println("Materia: " + vo);
-			verticesDest = grafo.vertices();
-			while (!verticesDest.conjuntoVacio()) {
-				vd = verticesDest.elegir();
-				verticesDest.sacar(vd);
-				if (vo != vd && grafo.existeArista(vo, vd)) {
-					System.out.println("(" + vd + "," + grafo.pesoArista(vo, vd) + ")");
-				}
-			}
-		}
 	}
 
 	private static void inicializarDiccionario() {
