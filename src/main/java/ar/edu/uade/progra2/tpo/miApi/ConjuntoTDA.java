@@ -6,7 +6,8 @@ package ar.edu.uade.progra2.tpo.miApi;
  **/
 /**
  * @TDA ConjuntoTDA
- * @Definicion
+ * @Definicion Estructura de datos no repetidos y desordenados, tal que el
+ *             primer dato a obtener esta determinado de forma aleatoria.
  *
  */
 public interface ConjuntoTDA {
@@ -17,7 +18,7 @@ public interface ConjuntoTDA {
 	 * @Parametros
 	 * @Devuelve
 	 * @Precondicion
-	 * @Postcondicion
+	 * @Postcondicion Conjunto inicializado.
 	 */
 	void inicializarConjunto();
 
@@ -27,7 +28,7 @@ public interface ConjuntoTDA {
 	 * @Devuelve
 	 * @Precondicion debe estar inicializado y se debe evaluar si el conjunto ya se
 	 *               encuentra lleno
-	 * @Postcondicion
+	 * @Postcondicion Elemento agregado al conjunto.
 	 */
 	void agregar(int elemento);
 
@@ -37,7 +38,7 @@ public interface ConjuntoTDA {
 	 * @Devuelve
 	 * @Precondicion debe estar inicializado y se debe evaluar que el conjunto no
 	 *               este vacio.
-	 * @Postcondicion
+	 * @Postcondicion Elemento fue quitado del conjunto.
 	 */
 	void sacar(int elemento);
 
@@ -47,7 +48,7 @@ public interface ConjuntoTDA {
 	 * @Devuelve int elemento
 	 * @Precondicion debe estar inicializado y se debe evaluar que el conjunto no
 	 *               este vacio.
-	 * @Postcondicion
+	 * @Postcondicion devuelve elemento al azar del conjunto.
 	 */
 	int elegir();
 
@@ -56,7 +57,7 @@ public interface ConjuntoTDA {
 	 * @Parametros
 	 * @Devuelve boolean indicando verdadero o falso.
 	 * @Precondicion debe estar inicializado.
-	 * @Postcondicion
+	 * @Postcondicion true o false segun si el conjunto esta vacio o no.
 	 */
 	boolean conjuntoVacio();
 
@@ -65,7 +66,7 @@ public interface ConjuntoTDA {
 	 * @Parametros int elemento.
 	 * @Devuelve boolean indicando verdadero o falso.
 	 * @Precondicion debe estar inicializado.
-	 * @Postcondicion
+	 * @Postcondicion true o false segun si el elemento pertenece o no.
 	 */
 	boolean pertenece(int elemento);
 }

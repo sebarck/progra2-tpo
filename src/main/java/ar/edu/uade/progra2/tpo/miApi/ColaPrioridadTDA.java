@@ -5,7 +5,7 @@ package ar.edu.uade.progra2.tpo.miApi;
  **/
 /**
  * @TDA ColaPrioridadTDA
- * @Definicion 
+ * @Definicion Conjunto de datos tal que el primer dato en entrar es el primer en salir.
  *
  */
 public interface ColaPrioridadTDA {
@@ -15,7 +15,7 @@ public interface ColaPrioridadTDA {
 	@Parametros
 	@Devuelve
 	@Precondicion
-	@Postcondicion
+	@Postcondicion Cola inicializada.
 	*/
 	void inicializarCola();
 	
@@ -24,7 +24,7 @@ public interface ColaPrioridadTDA {
 	@Parametros x,p
 	@Devuelve
 	@Precondicion cola inicializada
-	@Postcondicion
+	@Postcondicion Elemento en la cola.
 	*/
 	void acolarPrioridad(int x,int p);
 	
@@ -33,7 +33,7 @@ public interface ColaPrioridadTDA {
 	@Parametros
 	@Devuelve boolean dependiendo si la cola esta vacia o no.
 	@Precondicion cola inicializada
-	@Postcondicion
+	@Postcondicion true o false si la cola esta vacia o no.
 	*/
 	boolean colaVacia();
 	
@@ -42,7 +42,7 @@ public interface ColaPrioridadTDA {
 	@Parametros
 	@Devuelve
 	@Precondicion Cola no vacia e inicializada
-	@Postcondicion
+	@Postcondicion Saca elemento de la cola. 
 	*/
 	void desacolar();
 	
@@ -52,7 +52,7 @@ public interface ColaPrioridadTDA {
 	@Parametros
 	@Devuelve int elemento con mayor prioridad
 	@Precondicion Cola inicializada y no vacia
-	@Postcondicion
+	@Postcondicion Devuelve el primer elemento de la cola.
 	*/
 	int primero();
 	
@@ -61,7 +61,7 @@ public interface ColaPrioridadTDA {
 	@Parametros
 	@Devuelve int prioridad
 	@Precondicion cola inicializada y no vacia
-	@Postcondicion
+	@Postcondicion Devuelve la prioridad del primer elemento de la cola.
 	*/
 	int prioridad();
 

@@ -16,7 +16,7 @@ public interface GrafoTDA {
 	 * @Parametros
 	 * @Devuelve
 	 * @Precondicion
-	 * @Postcondicion
+	 * @Postcondicion Grafo inicializado.
 	 */
 	void inicializarGrafo();
 
@@ -25,7 +25,7 @@ public interface GrafoTDA {
 	 * @Parametros int v.
 	 * @Devuelve
 	 * @Precondicion debe estar inicializado y no existir el vertice.
-	 * @Postcondicion
+	 * @Postcondicion Vertice agregado.
 	 */
 	void agregarVertice(int v);
 
@@ -34,7 +34,7 @@ public interface GrafoTDA {
 	 * @Parametros int v.
 	 * @Devuelve
 	 * @Precondicion debe estar inicializado y existir el vertice.
-	 * @Postcondicion
+	 * @Postcondicion Vertice eliminado.
 	 */
 	void eliminarVertice(int v);
 
@@ -43,7 +43,7 @@ public interface GrafoTDA {
 	 * @Parametros
 	 * @Devuelve ConjuntoTDA conjunto de vertices.
 	 * @Precondicion debe estar inicializado.
-	 * @Postcondicion
+	 * @Postcondicion Devuelve vertices.
 	 */
 	ConjuntoTDA vertices();
 
@@ -54,7 +54,7 @@ public interface GrafoTDA {
 	 * @Devuelve
 	 * @Precondicion debe estar inicializado, no existir la arista entre los
 	 *               vertices v1 y v2 y existir ambos vertices.
-	 * @Postcondicion
+	 * @Postcondicion Arista agregada.
 	 */
 	void agregarArista(int v1, int v2, int peso);
 
@@ -64,7 +64,7 @@ public interface GrafoTDA {
 	 * @Devuelve
 	 * @Precondicion debe estar inicializado y existir la arista entre los vertices
 	 *               v1 y v2.
-	 * @Postcondicion
+	 * @Postcondicion Arista eliminada.
 	 */
 	void eliminarArista(int v1, int v2);
 
@@ -74,7 +74,7 @@ public interface GrafoTDA {
 	 * @Parametros int v1, int v2.
 	 * @Devuelve boolean true si existe, false si no existe.
 	 * @Precondicion debe estar inicializado y existir ambos vertices.
-	 * @Postcondicion
+	 * @Postcondicion true o false si arista existe o no.
 	 */
 	boolean existeArista(int v1, int v2);
 
@@ -84,7 +84,7 @@ public interface GrafoTDA {
 	 * @Devuelve int peso de la arista.
 	 * @Precondicion debe estar inicializado y existir la arista entre los vertices
 	 *               v1 y v2.
-	 * @Postcondicion
+	 * @Postcondicion Devuelve peso arista.
 	 */
 	int pesoArista(int v1, int v2);
 

@@ -6,7 +6,9 @@ package ar.edu.uade.progra2.tpo.miApi;
  **/
 /**
  * @TDA DiccionarioMultipleTDA
- * @Definicion
+ * @Definicion Estructura tal que cada elemento tiene asociado una clave.Donde
+ *             cada clave puede tener asociado mas de un valor y estos no pueden
+ *             estar repetidos.
  *
  */
 public interface DiccionarioMultipleTDA {
@@ -16,7 +18,7 @@ public interface DiccionarioMultipleTDA {
 	 * @Parametros
 	 * @Devuelve
 	 * @Precondicion
-	 * @Postcondicion
+	 * @Postcondicion Diccionario inicializado.
 	 */
 	void inicializarDiccionarioMultiple();
 
@@ -27,7 +29,7 @@ public interface DiccionarioMultipleTDA {
 	 * @Precondicion debe estar inicializado, se debe evaluar si el diccionario ya
 	 *               se encuentra lleno y que la clave|valor a agregar no se
 	 *               encuentre ya en el diccionario
-	 * @Postcondicion
+	 * @Postcondicion Clave y valor agregadas al diccionario.
 	 */
 	void agregar(int clave, int valor);
 
@@ -38,7 +40,7 @@ public interface DiccionarioMultipleTDA {
 	 * @Precondicion debe estar inicializado, se debe evaluar si el diccionario no
 	 *               se encuentra vacio y que la clave con elemento a eliminar
 	 *               exista
-	 * @Postcondicion
+	 * @Postcondicion Clave eliminada del diccionario.
 	 */
 	void eliminar(int clave);
 
@@ -48,7 +50,7 @@ public interface DiccionarioMultipleTDA {
 	 * @Devuelve ConjuntoTDA valor.
 	 * @Precondicion debe estar inicializado, se debe evaluar si el diccionario no
 	 *               se encuentra vacio y que la clave con elemento a obtener exista
-	 * @Postcondicion
+	 * @Postcondicion Clave recuperada del diccionario.
 	 */
 	ConjuntoTDA recuperar(int clave);
 
@@ -59,7 +61,7 @@ public interface DiccionarioMultipleTDA {
 	 * @Precondicion debe estar inicializado, se debe evaluar si el diccionario no
 	 *               se encuentra vacio y que la clave con elemento a eliminar
 	 *               exista.
-	 * @Postcondicion
+	 * @Postcondicion Valor eliminado del diccionario.
 	 */
 	void eliminarValor(int clave, int valor);
 
@@ -68,7 +70,7 @@ public interface DiccionarioMultipleTDA {
 	 * @Parametros
 	 * @Devuelve ConjuntoTDA conjunto de claves.
 	 * @Precondicion debe estar inicializado.
-	 * @Postcondicion
+	 * @Postcondicion Devuelve el conjunto de claves del diccionario.
 	 */
 	ConjuntoTDA claves();
 }
